@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,10 +39,13 @@ public class TestCar {
     void testReturnCar() {
         testCar.rentOutCar();
         assertTrue(testCar.isRented());
+        LocalDate dateRented = LocalDate.now();
+        assertEquals(dateRented.toString(), testCar.getRentedDate());
         testCar.returnCar();
         assertFalse(testCar.isRented());
         LocalDate dateReturned = LocalDate.now();
         assertEquals(dateReturned.toString(), testCar.getReturnedDate());
+        assertEquals(1, testCar.getDaysRented());
     }
 
     @Test
