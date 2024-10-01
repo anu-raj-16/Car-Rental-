@@ -1,22 +1,26 @@
 package model;
 // represents a Car in the Car Rental System
+
+import java.time.LocalDate;
+
 public class Car {
     // contructs a Car with given number, make, bodystyle, year 
     // and which has not been rented out to yet
-    public Car() {
+    public Car(String number, String make, String bodystyle, int year) {
         
     }
 
     // REQUIRES: Car is not already rented out
     // MODIFIES: this
-    // EFFECTS: rents out this Car
+    // EFFECTS: rents out this Car and tracks the day it was rented out
     public void rentOutCar() {
         //stub
     }
 
     // REQUIRES: Car is rented out
     // MODIFIES: this
-    // EFFECTS: accepts Car back into the Car Rental System
+    // EFFECTS: accepts Car back into the Car Rental System tracks
+    //          the date it was returned
     public void returnCar() {
         //stub
     }
@@ -24,7 +28,7 @@ public class Car {
     // REQUIRES: Car has been returned after being rented out
     // MODIFIES: this
     // EFFECTS: calculates amount paid for renting Car
-    public void calculateAmount() {
+    public void calculateAmount(int days) {
          //stub
     }
 
@@ -32,8 +36,8 @@ public class Car {
         return false; //stub
     }
 
-    public int getNumber() {
-        return 0; //stub
+    public String getNumber() {
+        return ""; //stub
     }
 
     public String getMake() {
@@ -50,5 +54,13 @@ public class Car {
 
     public double getAmount() {
         return 0.0; //stub
+    }
+
+    public String getRentedDate() {
+        return ""; //stub
+    }
+
+    public String getReturnedDate() {
+        return ""; //stub
     }
 }
