@@ -1,23 +1,23 @@
 package model;
-// represents a Car in the Car Rental System
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+// represents a Car in the Car Rental System
 public class Car {
-    String number;
-    String make;
-    String bodystyle;
-    int year;
-    boolean rented;
-    LocalDate dateRented;
-    LocalDate dateReturned;
-    double amount;
-    long daysRented;
+    private String number;
+    private String make;
+    private String bodystyle;
+    private int year;
+    private boolean rented;
+    private LocalDate dateRented;
+    private LocalDate dateReturned;
+    private double amount;
+    private long daysRented;
 
-    final double AMOUNT_CHARGED_PER_DAY = 100.0;
+    private static final double AMOUNT_CHARGED_PER_DAY = 100.0;
 
-    // contructs a Car with given number, make, bodystyle, year 
+    // contructs a Car with given number, make, bodystyle, year
     // and which has not been rented out to yet
     public Car(String number, String make, String bodystyle, int year) {
         this.number = number;
@@ -38,54 +38,55 @@ public class Car {
     // REQUIRES: Car is rented out
     // MODIFIES: this
     // EFFECTS: accepts Car back into the Car Rental System tracks
-    //          the date it was returned
+    // the date it was returned
     public void returnCar() {
         this.rented = false;
         this.dateReturned = LocalDate.now();
         this.daysRented = ChronoUnit.DAYS.between(dateRented, dateReturned) + 1;
-        calculateAmount((int)daysRented);
+        calculateAmount((int) daysRented);
     }
 
     // REQUIRES: Car has been returned after being rented out
     // MODIFIES: this
     // EFFECTS: calculates amount paid for renting Car
     public void calculateAmount(int days) {
-         this.amount = days * AMOUNT_CHARGED_PER_DAY;
+        this.amount = days * AMOUNT_CHARGED_PER_DAY;
     }
 
+    // getters
     public boolean isRented() {
-        return this.rented; //stub
+        return this.rented; // stub
     }
 
     public String getNumber() {
-        return this.number; //stub
+        return this.number; // stub
     }
 
     public String getMake() {
-        return this.make; //stub
+        return this.make; // stub
     }
 
     public String getBodystyle() {
-        return this.bodystyle; //stub
+        return this.bodystyle; // stub
     }
 
     public int getYear() {
-        return this.year; //stub
+        return this.year; // stub
     }
 
-    public double getAmount() {
-        return this.amount; //stub
+    public double getAmountChargedPerDay() {
+        return this.amount; // stub
     }
 
     public String getRentedDate() {
-        return this.dateRented.toString(); //stub
+        return this.dateRented.toString(); // stub
     }
 
     public String getReturnedDate() {
-        return this.dateReturned.toString(); //stub
+        return this.dateReturned.toString(); // stub
     }
 
     public long getDaysRented() {
-        return this.daysRented; //stub
+        return this.daysRented; // stub
     }
 }

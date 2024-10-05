@@ -51,8 +51,8 @@ public class TestCar {
     @Test
     void testCalculateAmount() {
         testCar.calculateAmount(1);
-        assertEquals(100, testCar.getAmount());
+        assertEquals(100, testCar.getAmountChargedPerDay());
         testCar.calculateAmount(4);
-        assertEquals(400, testCar.getAmount());
+        assertEquals(400, testCar.getAmountChargedPerDay());
     }
 }
