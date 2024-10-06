@@ -1,16 +1,20 @@
 package model;
 
-//represents a Car Rental
+import java.util.List;
+
+//represents a Car Rental agency
 public class CarRental {
 
-    // EFFECTS: constructs a Car Rental with five default cars
+    // EFFECTS: constructs a Car Rental with five default cars 
+    // and sets total revenue to zero.
     public CarRental() {
 
     }
 
     // REQUIRES: car must not already be owned by this Car Rental
     // MODIFIES: this
-    // EFFECTS: adds the given car to the list of cars in this
+    // EFFECTS: adds the given car to the list of cars in this 
+    // and sets the car as available for renting
     public void addCar(Car c) {
 
     }
@@ -24,26 +28,26 @@ public class CarRental {
 
     // REQUIRES: a car has been returned just before calling this method and method
     // should not be called again until another car has been returned or
-    // the same car was rented out and returned again.
+    // the same car was rented out and returned again and amount >= 0
     // MODIFIES: this
     // EFFECTS: calculates the total revenue made by adding
     // the amount made by each car in the rental
-    public void calculateTotalRevenue() {
+    public void calculateTotalRevenue(double amount) {
 
     }
 
-    // REQUIRES: a valid car name that belongs to the car rental agency
+    // REQUIRES: a valid car number that belongs to the car rental agency
     // MODIFIES: this
     // EFFECTS: rents out the car with the given name
-    public void rentACar(String name) {
+    public void rentACar(String number) {
 
     }
 
-    // REQUIRES: a valid car name that belongs to the car rental agency
+    // REQUIRES: a valid car number that belongs to the car rental agency
     // MODIFIES: this
     // EFFECTS: returns the car with the given name
     // and updates the total revenue made
-    public void returnACar(String name) {
+    public void returnACar(String number) {
 
     }
 
@@ -62,5 +66,23 @@ public class CarRental {
     // that have been rented out
     public void listAllCarsRentedOut() {
 
+    }
+
+    //getters
+
+    public List<Car> getAllCars() {
+        return null;
+    }
+
+    public List<Car> getAllAvailableCars() {
+        return null;
+    }
+
+    public List<Car> getAllRentedCars() {
+        return null;
+    }
+
+    public double getTotalRevenue() {
+        return 0.0;
     }
 }
