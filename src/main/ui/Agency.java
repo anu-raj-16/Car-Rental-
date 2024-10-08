@@ -2,9 +2,10 @@ package ui;
 
 // Car rental ageny app
 public class Agency {
+
     // EFFECTS: runs the Car rental agency app
     public Agency() {
-        // stub
+       // stub
     }
 
     // MODIFIES: this
@@ -15,14 +16,14 @@ public class Agency {
     }
 
     // EFFECTS: processes user input and performs the corresponding action
-    public void processInput() {
+    public void processInput(String command) {
         // stub
     }
 
     // MODIFIES: this
     // EFFECTS: initializes car rental agency
     public void init() {
-         // stub
+        // stub
     }
 
     //EFFECTS: displays the options available to the user
