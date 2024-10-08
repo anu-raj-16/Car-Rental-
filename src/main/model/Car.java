@@ -42,7 +42,7 @@ public class Car {
     public void returnCar() {
         this.rented = false;
         this.dateReturned = LocalDate.now();
-        this.daysRented = ChronoUnit.DAYS.between(dateRented, dateReturned) + 1;
+        calculateDaysRented();
         calculateAmount((int) daysRented);
     }
 
@@ -51,6 +51,23 @@ public class Car {
     // EFFECTS: calculates amount paid for renting Car
     public void calculateAmount(int days) {
         this.amount = days * AMOUNT_CHARGED_PER_DAY;
+    }
+
+    // REQUIRES: car must have been rented and then returned and dateRented <= dateReturned
+    // MODIFIES: this
+    // EFFECTS: calculates the number of days for which the car had been rented out
+    // dateRented and dateReturned is inclusive
+    public void calculateDaysRented() {
+        this.daysRented = ChronoUnit.DAYS.between(this.dateRented, this.dateReturned) + 1;
+    }
+
+    //setters
+    public void setDateRented(int day, int month, int year) {
+        dateRented = LocalDate.of(year, month, day);
+    }
+
+    public void setDateReturned(int day, int month, int year) {
+        dateReturned = LocalDate.of(year, month, day);
     }
 
     // getters
@@ -78,12 +95,12 @@ public class Car {
         return this.amount; // stub
     }
 
-    public String getRentedDate() {
-        return this.dateRented.toString(); // stub
+    public LocalDate getRentedDate() {
+        return this.dateRented; // stub
     }
 
-    public String getReturnedDate() {
-        return this.dateReturned.toString(); // stub
+    public LocalDate getReturnedDate() {
+        return this.dateReturned; // stub
     }
 
     public long getDaysRented() {

@@ -32,7 +32,9 @@ public class TestCar {
         testCar.rentOutCar();
         LocalDate dateRented = LocalDate.now();
         assertTrue(testCar.isRented());
-        assertEquals(dateRented.toString(), testCar.getRentedDate());
+        assertEquals(dateRented.getDayOfMonth(), testCar.getRentedDate().getDayOfMonth());
+        assertEquals(dateRented.getMonth(), testCar.getRentedDate().getMonth());
+        assertEquals(dateRented.getYear(), testCar.getRentedDate().getYear());
     }
 
     @Test
@@ -40,11 +42,15 @@ public class TestCar {
         testCar.rentOutCar();
         assertTrue(testCar.isRented());
         LocalDate dateRented = LocalDate.now();
-        assertEquals(dateRented.toString(), testCar.getRentedDate());
+        assertEquals(dateRented.getDayOfMonth(), testCar.getRentedDate().getDayOfMonth());
+        assertEquals(dateRented.getMonth(), testCar.getRentedDate().getMonth());
+        assertEquals(dateRented.getYear(), testCar.getRentedDate().getYear());
         testCar.returnCar();
         assertFalse(testCar.isRented());
         LocalDate dateReturned = LocalDate.now();
-        assertEquals(dateReturned.toString(), testCar.getReturnedDate());
+        assertEquals(dateReturned.getDayOfMonth(), testCar.getReturnedDate().getDayOfMonth());
+        assertEquals(dateReturned.getMonth(), testCar.getReturnedDate().getMonth());
+        assertEquals(dateReturned.getYear(), testCar.getReturnedDate().getYear());
         assertEquals(1, testCar.getDaysRented());
     }
 
@@ -54,5 +60,21 @@ public class TestCar {
         assertEquals(100, testCar.getAmountChargedPerDay());
         testCar.calculateAmount(4);
         assertEquals(400, testCar.getAmountChargedPerDay());
+    }
+
+    @Test
+    void testCalculateDaysTentedOneDay() {
+        testCar.setDateRented(5, 5, 2024);
+        testCar.setDateReturned(5, 5, 2024);
+        testCar.calculateDaysRented();
+        assertEquals(1, testCar.getDaysRented());
+    }
+
+    @Test
+    void testCalculateDaysTentedMultipleDay() {
+        testCar.setDateRented(5, 9, 2024);
+        testCar.setDateReturned(15, 9, 2024);
+        testCar.calculateDaysRented();
+        assertEquals(11, testCar.getDaysRented());
     }
 }
