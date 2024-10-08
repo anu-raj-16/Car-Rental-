@@ -89,7 +89,8 @@ public class CarRental {
 
     // MODIFIES: this
     // EFFECTS: returns the car with the given name
-    // and updates the total revenue made
+    // and updates the total revenue made and returns true if successful
+    // else returns false
     public boolean returnACar(String number) {
         int count = 0;
         for (int i = 0; i < allRentedCars.size(); i++) {
