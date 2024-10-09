@@ -160,6 +160,19 @@ public class TestCarRental {
     }
 
     @Test
+    void testRentACarWhenNoneAvailable() {
+        List<Car> cars = testCarRental.getAllCars();
+        int i = 0;
+        while (cars.size() > 0) {
+            testCarRental.removeCar(cars.get(i));
+        }
+        assertEquals(0, testCarRental.getAllCars().size());
+        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        boolean rent = testCarRental.rentACar(testCar.getNumber());
+        assertFalse(rent);
+    }
+
+    @Test
     void testRentMultipleCars() {
         Car testCar1 = new Car("234876", "TESTCAR1", "Sedan", 2024);
         Car testCar2 = new Car("232834", "TESTCAR2", "Sedan", 2024);
@@ -224,6 +237,12 @@ public class TestCarRental {
     }
 
     @Test
+    void testReturnACarWhenNoneRentedOut() {
+        boolean returnCar = testCarRental.returnACar("TestNumber");
+        assertFalse(returnCar);
+    }
+
+    @Test
     void testReturnMultiplecars() {
         Car testCar1 = new Car("234876", "TESTCAR1", "Sedan", 2024);
         Car testCar2 = new Car("232834", "TESTCAR2", "Sedan", 2024);
@@ -234,6 +253,10 @@ public class TestCarRental {
         boolean rentCar1 = testCarRental.rentACar("234876");
         boolean rentCar2 = testCarRental.rentACar("232834");
         boolean rentCar3 = testCarRental.rentACar("236734");
+
+        assertTrue(rentCar3);
+        assertTrue(rentCar2);
+        assertTrue(rentCar1);
 
         assertTrue(testCar1.isRented());
         assertTrue(testCar2.isRented());
