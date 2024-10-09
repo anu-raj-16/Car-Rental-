@@ -10,11 +10,11 @@ public class CarRental {
     private List<Car> allRentedCars;
     private double totalRevenue;
 
-    private static final Car FORD = new Car("V45 38H", "Ford", "Sedan", 2020);
-    private static final Car TOYOTA = new Car("V34 87J", "Toyota", "Sedan", 2021);
-    private static final Car HONDA = new Car("SE4 8HG", "Honda", "SUV", 2021);
-    private static final Car NISSAN = new Car("YO4 6GH", "Nissan", "SUV", 2023);
-    private static final Car KIA = new Car("BR2 XF6", "Kia", "Sedan", 2022);
+    private static final Car FORD = new Car("V4538H", "Ford", "Sedan", 2020);
+    private static final Car TOYOTA = new Car("V3487J", "Toyota", "Sedan", 2021);
+    private static final Car HONDA = new Car("SE48HG", "Honda", "SUV", 2021);
+    private static final Car NISSAN = new Car("YO46GH", "Nissan", "SUV", 2023);
+    private static final Car KIA = new Car("BR2XF6", "Kia", "Sedan", 2022);
 
     // EFFECTS: constructs a Car Rental with five default cars
     // and sets total revenue to zero.
@@ -47,7 +47,7 @@ public class CarRental {
         allAvailableCars.add(c);
     }
 
-    // REQUIRES: car has to be owned by this Car Rental
+    // REQUIRES: car has to be owned by this Car Rental and not rented out
     // MODIFIES: this
     // EFFECTS: remove the given car from the list of cars in this
     public void removeCar(Car c) {
@@ -78,13 +78,16 @@ public class CarRental {
                 count = i;
             }
         }
-        if (allRentedCars.contains(allAvailableCars.get(count))) {
-            allAvailableCars.remove(count);
-            return true;
+        if (allAvailableCars.size() > 0) {
+            if (allRentedCars.contains(allAvailableCars.get(count))) {
+                allAvailableCars.remove(count);
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
-
     }
 
     // MODIFIES: this
@@ -102,9 +105,13 @@ public class CarRental {
                 calculateTotalRevenue(car.getAmountChargedPerDay());
             }
         }
-        if (allAvailableCars.contains(allRentedCars.get(count))) {
-            allRentedCars.remove(count);
-            return true;
+        if (allRentedCars.size() > 0) {
+            if (allAvailableCars.contains(allRentedCars.get(count))) {
+                allRentedCars.remove(count);
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
