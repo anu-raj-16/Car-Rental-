@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-//represents a Car Rental agency
+//represents a Car Rental system
 public class CarRental {
     private List<Car> allCars;
     private List<Car> allAvailableCars;
@@ -38,21 +38,38 @@ public class CarRental {
         totalRevenue = 0;
     }
 
-    // REQUIRES: car must not already be owned by this Car Rental
     // MODIFIES: this
-    // EFFECTS: adds the given car to the list of cars in this
-    // and sets the car as available for renting
-    public void addCar(Car c) {
-        allCars.add(c);
-        allAvailableCars.add(c);
+    // EFFECTS: adds the given car to the list of cars if given car with its car.getNumber() is
+    // not already in the system and sets the car as available for renting and
+    // returns true, else returns false
+    public boolean addCar(Car c) {
+        if (checkCarInList(c.getNumber(), allCars)) {
+            return false;
+        } else {
+            allCars.add(c);
+            allAvailableCars.add(c);
+            return true;
+        }
     }
 
-    // REQUIRES: car has to be owned by this Car Rental and not rented out
     // MODIFIES: this
-    // EFFECTS: remove the given car from the list of cars in this
-    public void removeCar(Car c) {
-        allCars.remove(c);
-        allAvailableCars.remove(c);
+    // EFFECTS: removes the car with the given number from the list of cars in this 
+    // if car is in the system, not rented out (is available) and returns true,
+    // else returns false
+    public boolean removeCar(String number) {
+        if (checkCarInList(number, allAvailableCars)) {
+            int index = 0;
+            for (int i = 0; i < allAvailableCars.size(); i++) {
+                if (allAvailableCars.get(i).getNumber().equals(number)) {
+                    index = i;
+                }
+            }
+            allCars.remove(index);
+            allAvailableCars.remove(index);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // REQUIRES: a car has been returned just before calling this method and method
@@ -91,7 +108,7 @@ public class CarRental {
     }
 
     // MODIFIES: this
-    // EFFECTS: returns the car with the given name
+    // EFFECTS: returns the car to the agency with the given name
     // and updates the total revenue made and returns true if successful
     // else returns false
     public boolean returnACar(String number) {
@@ -112,6 +129,21 @@ public class CarRental {
             } else {
                 return false;
             }
+        } else {
+            return false;
+        }
+    }
+
+    // EFFECTS: returns true if a car given the given number is in given list,
+    //          else returns false, also return false if list is empty
+    public boolean checkCarInList(String number, List<Car> cars) {
+        if (cars.size() > 0) {
+            for (Car car : cars) {
+                if (car.getNumber().equals(number)) {
+                    return true;
+                }
+            }
+            return false;
         } else {
             return false;
         }

@@ -1,4 +1,5 @@
-// References: TellerApp from Phase 1 page of the EdX page
+// References: TellerApp class in the ui package
+// of TellerApp from Phase 1 page on the EdX page
 
 package ui;
 
@@ -41,7 +42,7 @@ public class Agency {
             }
         }
 
-        System.out.println("Thank you and hope to see you soon!");
+        System.out.println("\nThank you and hope to see you soon!");
     }
 
     // EFFECTS: processes user input and performs the corresponding action
@@ -76,26 +77,27 @@ public class Agency {
     public void init() {
         agency = new CarRental();
         input = new Scanner(System.in);
+        input.useDelimiter("\r?\n|\r");
     }
 
     // EFFECTS: displays the options available to the user
     public void displayMenu() {
-        System.out.println("Select from");
-        System.out.println("a -> to rent a car");
-        System.out.println("b -> to return a car");
-        System.out.println("c -> to add a car to the agency");
-        System.out.println("d -> to remove a car from the agency");
-        System.out.println("e -> to view all cars");
-        System.out.println("f -> to view all available cars");
-        System.out.println("g -> to view all cars that have been rented out");
-        System.out.println("h -> to check total revenue");
-        System.out.println("i -> to check the number of cars in the agency");
-        System.out.println("j -> to check the number of cars rented out");
-        System.out.println("q -> to quit");
+        System.out.println("\nSelect from");
+        System.out.println("\ta -> to rent a car");
+        System.out.println("\tb -> to return a car");
+        System.out.println("\tc -> to add a car to the agency");
+        System.out.println("\td -> to remove a car from the agency");
+        System.out.println("\te -> to view all cars");
+        System.out.println("\tf -> to view all available cars");
+        System.out.println("\tg -> to view all cars that have been rented out");
+        System.out.println("\th -> to check total revenue");
+        System.out.println("\ti -> to check the number of cars in the agency");
+        System.out.println("\tj -> to check the number of cars rented out");
+        System.out.println("\tq -> to quit");
     }
 
     // MODIFIES: this
-    // EFFECTS: rents out the car requested by user if user is eligible
+    // EFFECTS: rents out the car requested by user if user is eligible and the car is available
     public void rentOutACar() {
         if (checkEligible()) {
             System.out.println("Here is a list of all available cars:");
@@ -115,7 +117,8 @@ public class Agency {
     }
 
     // MODIFIES: this
-    // EFFECTS: returns the car rented out by user
+    // EFFECTS: returns the car rented out by user if the car number 
+    // provided corresponds to a car rented out
     public void returnRentedCar() {
         System.out.println("Please enter the number of the car that you wish to return:");
         System.out.println("Note: please enter a valid number");
@@ -129,30 +132,10 @@ public class Agency {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds a car to collection owned by the agency 
+    // EFFECTS: adds a car to collection owned by the agency if not already owned by agency
     public void addACar() {
         System.out.println("Please enter the number of the car you want to add:");
         String number = input.next();
-        List<Car> cars = agency.getAllCars();
-        boolean carIn = false;
-        if (cars.size() > 0) {
-            for (Car car : cars) {
-                if (car.getNumber().equals(number)) {
-                    carIn = true;
-                }
-            }
-        }
-        if (!carIn) {
-            getNewCar(number);
-        } else {
-            System.out.println("Car is already in the system.");
-        }
-    }
-
-    // REQUIRES: agency does not already have a car with number
-    // MODIFIES: this
-    // EFFFECTS: adds a car with the given input to the agency
-    private void getNewCar(String number) {
         System.out.println("Please enter the make of the car:");
         String make = input.next();
         System.out.println("Please enter the bodystyle of the car:");
@@ -160,31 +143,26 @@ public class Agency {
         System.out.println("Please enter the year/ model of the car:");
         int year = input.nextInt();
         Car newCar = new Car(number, make, bodystyle, year);
-        agency.addCar(newCar);
-        System.out.println("Car was added to the system!");
+        boolean addCar = agency.addCar(newCar);
+        if (addCar) {
+            System.out.println("Car was added to the system!");
+        } else {
+            System.out.println("Car is already in the system and hence, was not added.");
+        }
     }
 
     // MODIFIES: this
-    // EFFECTS: remove a car from collection owned by the agency
+    // EFFECTS: removes the car with the given from collection owned by the agency 
+    // if such a car is owned.
     public void removeACar() {
         System.out.println("Please enter the number of the car you wish to remove:");
         String number = input.next();
-        List<Car> carsAvailable = agency.getAllAvailableCars();
-        Car removeCar = new Car("Demo", "Demo", "Demo", 2024);
-        boolean carAvailable = false;
-        if (carsAvailable.size() > 0) {
-            for (Car car : carsAvailable) {
-                if (car.getNumber().equals(number)) {
-                    carAvailable = true;
-                    removeCar = car;
-                }
-            }
-        }
-        if (carAvailable) {
-            agency.removeCar(removeCar);
-            System.out.println("Car was removed from system.");
+        boolean removeCar = agency.removeCar(number);
+        if (removeCar) {
+            System.out.println("The car has been removed from the system!");
         } else {
-            System.out.println("Sorry, car is not in the system or has been rented out.");
+            System.out.print("Sorry, the car is either not in the system ");
+            System.out.println("or has been rented out and cannot be removed.");
         }
     }
 
@@ -218,8 +196,7 @@ public class Agency {
     }
 
     // EFFECTS: displays information of all cars owned by the car rental that are
-    // available
-    // for renting in the order - number, make, bodystyle, model
+    // available for renting in the order - number, make, bodystyle, model
     public void viewAllAvailableCars() {
         List<Car> cars = agency.getAllAvailableCars();
         if (cars.size() > 0) {
@@ -233,8 +210,7 @@ public class Agency {
     }
 
     // EFFECTS: displays information of all cars owned by the car rental that have
-    // been
-    // rented out in the order - number, make, bodystyle, model
+    // been rented out in the order - number, make, bodystyle, model
     public void viewAllRentedCars() {
         List<Car> cars = agency.getAllRentedCars();
         if (cars.size() > 0) {

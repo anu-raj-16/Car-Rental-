@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -41,7 +42,8 @@ public class TestCarRental {
     @Test
     void testAddOneCar() {
         Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
-        testCarRental.addCar(testCar);
+        boolean addCar = testCarRental.addCar(testCar);
+        assertTrue(addCar);
         List<Car> testAllCars = testCarRental.getAllCars();
         assertEquals(6, testAllCars.size());
         assertEquals("TESTCAR", testAllCars.get(5).getMake());
@@ -51,13 +53,36 @@ public class TestCarRental {
     }
 
     @Test
+    void testAddCarFails() {
+        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        boolean addCar1 = testCarRental.addCar(testCar);
+        boolean addCar2 = testCarRental.addCar(testCar);
+
+        assertTrue(addCar1);
+        assertFalse(addCar2);
+        List<Car> testAllCars = testCarRental.getAllCars();
+        assertEquals(6, testAllCars.size());
+        assertEquals("TESTCAR", testAllCars.get(5).getMake());
+        assertTrue(testAllCars.contains(testCar));
+
+        assertTrue(testCarRental.getAllAvailableCars().contains(testCar));
+
+    }
+
+    @Test
     void testAddMultipleCars() {
         Car testCar1 = new Car("234876", "TESTCAR1", "Sedan", 2024);
         Car testCar2 = new Car("232834", "TESTCAR2", "Sedan", 2024);
         Car testCar3 = new Car("236734", "TESTCAR3", "Sedan", 2024);
-        testCarRental.addCar(testCar1);
-        testCarRental.addCar(testCar2);
-        testCarRental.addCar(testCar3);
+        boolean addCar1 = testCarRental.addCar(testCar1);
+        boolean addCar2 = testCarRental.addCar(testCar2);
+        boolean addCarFail = testCarRental.addCar(testCar2);
+        boolean addCar3 = testCarRental.addCar(testCar3);
+
+        assertTrue(addCar1);
+        assertTrue(addCar2);
+        assertTrue(addCar3);
+        assertFalse(addCarFail);
 
         List<Car> testAllCars = testCarRental.getAllCars();
         assertEquals(8, testAllCars.size());
@@ -76,13 +101,14 @@ public class TestCarRental {
     @Test
     void testRemoveOneCar() {
         Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
-        testCarRental.addCar(testCar);
-
+        boolean addCar = testCarRental.addCar(testCar);
+        assertTrue(addCar);
         List<Car> testAllCars = testCarRental.getAllCars();
         assertEquals(6, testAllCars.size());
         assertEquals("TESTCAR", testAllCars.get(5).getMake());
 
-        testCarRental.removeCar(testCar);
+        boolean removeCar = testCarRental.removeCar("234567");
+        assertTrue(removeCar);
         testAllCars = testCarRental.getAllCars();
         assertEquals(5, testAllCars.size());
         assertFalse(testAllCars.contains(testCar));
@@ -91,23 +117,79 @@ public class TestCarRental {
     }
 
     @Test
+    void testRemoveOneCarUnsuccessful() {
+        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        boolean removeCar = testCarRental.removeCar("234567");
+        assertFalse(removeCar);
+        List<Car> testAllCars = testCarRental.getAllCars();
+        testAllCars = testCarRental.getAllCars();
+        assertEquals(5, testAllCars.size());
+        assertEquals(5, testAllCars.size());
+        assertFalse(testAllCars.contains(testCar));
+
+        assertFalse(testCarRental.getAllAvailableCars().contains(testCar));
+    }
+
+    @Test
+    void testRemoveOneCarTwiceUnsuccessful() {
+        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        boolean addCar = testCarRental.addCar(testCar);
+        assertTrue(addCar);
+        List<Car> testAllCars = testCarRental.getAllCars();
+        assertEquals(6, testAllCars.size());
+        assertEquals("TESTCAR", testAllCars.get(5).getMake());
+
+        boolean removeCarOnce = testCarRental.removeCar("234567");
+        boolean removeCarTwice = testCarRental.removeCar("234567");
+
+        assertTrue(removeCarOnce);
+        assertFalse(removeCarTwice);
+        testAllCars = testCarRental.getAllCars();
+        assertEquals(5, testAllCars.size());
+        assertEquals(5, testAllCars.size());
+        assertFalse(testAllCars.contains(testCar));
+
+        assertFalse(testCarRental.getAllAvailableCars().contains(testCar));
+    }
+
+    @Test
+    void testRemoveCarWhenCarRentedOut() {
+        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        boolean addCar = testCarRental.addCar(testCar);
+        assertTrue(addCar);
+        boolean rentCar = testCarRental.rentACar("234567");
+        assertTrue(rentCar);
+        boolean removeCar = testCarRental.removeCar("234567");
+        assertFalse(removeCar);
+        assertTrue(testCarRental.getAllRentedCars().contains(testCar));
+        assertTrue(testCarRental.getAllCars().contains(testCar));
+        assertFalse(testCarRental.getAllAvailableCars().contains(testCar));
+    }
+
+    @Test
     void testRemoveMultipleCars() {
         Car testCar1 = new Car("234876", "TESTCAR1", "Sedan", 2024);
         Car testCar2 = new Car("232834", "TESTCAR2", "Sedan", 2024);
         Car testCar3 = new Car("236734", "TESTCAR3", "Sedan", 2024);
-        testCarRental.addCar(testCar1);
-        testCarRental.addCar(testCar2);
-        testCarRental.addCar(testCar3);
-
+        boolean addCar1 = testCarRental.addCar(testCar1);
+        boolean addCar2 = testCarRental.addCar(testCar2);
+        boolean addCar3 = testCarRental.addCar(testCar3);
+        assertTrue(addCar1);
+        assertTrue(addCar2);
+        assertTrue(addCar3);
         List<Car> testAllCars = testCarRental.getAllCars();
         assertEquals(8, testAllCars.size());
         assertEquals("TESTCAR1", testAllCars.get(5).getMake());
         assertEquals("TESTCAR2", testAllCars.get(6).getMake());
         assertEquals("TESTCAR3", testAllCars.get(7).getMake());
 
-        testCarRental.removeCar(testCar3);
-        testCarRental.removeCar(testCar2);
-        testCarRental.removeCar(testCar1);
+        boolean returnCar3 = testCarRental.removeCar("234876");
+        boolean returnCar2 = testCarRental.removeCar("232834");
+        boolean returnCar1 = testCarRental.removeCar("236734");
+        assertTrue(returnCar3);
+        assertTrue(returnCar2);
+        assertTrue(returnCar1);
+
         assertEquals(5, testAllCars.size());
         assertFalse(testAllCars.contains(testCar1));
         assertFalse(testAllCars.contains(testCar2));
@@ -164,7 +246,7 @@ public class TestCarRental {
         List<Car> cars = testCarRental.getAllCars();
         int i = 0;
         while (cars.size() > 0) {
-            testCarRental.removeCar(cars.get(i));
+            boolean removeCar1 = testCarRental.removeCar(cars.get(i).getNumber());
         }
         assertEquals(0, testCarRental.getAllCars().size());
         Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
@@ -284,5 +366,38 @@ public class TestCarRental {
         assertFalse(testCar1.isRented());
         assertFalse(testCar2.isRented());
         assertTrue(testCar3.isRented());
+    }
+
+    @Test
+    void testCheckCarInListFailsListNotEmpty() {
+        Car testCar1 = new Car("234876", "TESTCAR1", "Sedan", 2024);
+        Car testCar2 = new Car("232834", "TESTCAR2", "Sedan", 2024);
+        Car testCar3 = new Car("236734", "TESTCAR3", "Sedan", 2024);
+        List<Car> cars = new ArrayList<>();
+        cars.add(testCar2);
+        cars.add(testCar3);
+        boolean inSystem = testCarRental.checkCarInList(testCar1.getNumber(), cars);
+        assertFalse(inSystem);
+    }
+
+    @Test
+    void testCheckCarInListFailsListEmpty() {
+        Car testCar1 = new Car("234876", "TESTCAR1", "Sedan", 2024);
+        List<Car> cars = new ArrayList<>();
+        boolean inSystem = testCarRental.checkCarInList(testCar1.getNumber(), cars);
+        assertFalse(inSystem);
+    }
+
+    @Test
+    void testCheckCarInListSuccesful() {
+        Car testCar1 = new Car("234876", "TESTCAR1", "Sedan", 2024);
+        Car testCar2 = new Car("232834", "TESTCAR2", "Sedan", 2024);
+        Car testCar3 = new Car("236734", "TESTCAR3", "Sedan", 2024);
+        List<Car> cars = new ArrayList<>();
+        cars.add(testCar2);
+        cars.add(testCar3);
+        cars.add(testCar1);
+        boolean inSystem = testCarRental.checkCarInList(testCar1.getNumber(), cars);
+        assertTrue(inSystem);
     }
 }
