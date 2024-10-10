@@ -1,3 +1,8 @@
+// REFERENCE: referred to Java Documentation provided by Oracle to understand how LocalDate.now()
+// and ChronoUnit.DAYS.between(start, end) functions work
+// https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/time/temporal/ChronoUnit.html#between(java.time.temporal.Temporal,java.time.temporal.Temporal)
+// https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/time/LocalDate.html#now()
+
 package model;
 
 import java.time.LocalDate;
@@ -17,7 +22,7 @@ public class Car {
 
     private static final double AMOUNT_CHARGED_PER_DAY = 100.0;
 
-    // contructs a Car with given number, make, bodystyle, year
+    // EFFECTS: contructs a Car with given number, make, bodystyle, year
     // and which has not been rented out to yet
     public Car(String number, String make, String bodystyle, int year) {
         this.number = number;
@@ -38,7 +43,8 @@ public class Car {
     // REQUIRES: Car is rented out
     // MODIFIES: this
     // EFFECTS: accepts Car back into the Car Rental System tracks
-    // the date it was returned
+    // the date it was returned, updates number of days it was rented out for,
+    // updates amount made
     public void returnCar() {
         this.rented = false;
         this.dateReturned = LocalDate.now();
