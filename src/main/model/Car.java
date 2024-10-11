@@ -12,7 +12,9 @@ import java.time.temporal.ChronoUnit;
 public class Car {
     private String number;
     private String make;
+    private String model;
     private String bodystyle;
+    private String color;
     private int year;
     private boolean rented;
     private LocalDate dateRented;
@@ -22,12 +24,14 @@ public class Car {
 
     private static final double AMOUNT_CHARGED_PER_DAY = 100.0;
 
-    // EFFECTS: contructs a Car with given number, make, bodystyle, year
+    // EFFECTS: contructs a Car with given number, make, model, bodystyle, color, year
     // and which has not been rented out to yet
-    public Car(String number, String make, String bodystyle, int year) {
+    public Car(String number, String make, String model, String bodystyle, String color, int year) {
         this.number = number;
         this.make = make;
+        this.model = model;
         this.bodystyle = bodystyle;
+        this.color = color;
         this.year = year;
         this.rented = false;
     }
@@ -89,8 +93,16 @@ public class Car {
         return this.make; // stub
     }
 
+    public String getModel() {
+        return this.model; // stub
+    }
+
     public String getBodystyle() {
         return this.bodystyle; // stub
+    }
+
+    public String getCarColor() {
+        return this.color; // stub
     }
 
     public int getYear() {

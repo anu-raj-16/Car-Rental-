@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,14 +14,16 @@ public class TestCar {
 
     @BeforeEach
     void runBefore() {
-        testCar = new Car("T1234", "Test Make", "Test Bodystyle", 2024);
+        testCar = new Car("T1234", "Test Make", "Test Model", "Test Bodystyle", "Yellow", 2024);
     }
 
     @Test
     void testConstructor() {
         assertEquals("T1234", testCar.getNumber());
         assertEquals("Test Make", testCar.getMake());
+        assertEquals("Test Model", testCar.getModel());
         assertEquals("Test Bodystyle", testCar.getBodystyle());
+        assertEquals("Yellow", testCar.getCarColor());
         assertEquals(2024, testCar.getYear());
         assertFalse(testCar.isRented());
     }
