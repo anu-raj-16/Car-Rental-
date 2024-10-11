@@ -41,7 +41,7 @@ public class TestCarRental {
 
     @Test
     void testAddOneCar() {
-        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        Car testCar = new Car("234567", "TESTCAR", "Test model", "Sedan", "blue", 2024);
         boolean addCar = testCarRental.addCar(testCar);
         assertTrue(addCar);
         List<Car> testAllCars = testCarRental.getAllCars();
@@ -54,7 +54,7 @@ public class TestCarRental {
 
     @Test
     void testAddCarFails() {
-        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        Car testCar = new Car("234567", "TESTCAR", "Test model", "Sedan", "Black", 2024);
         boolean addCar1 = testCarRental.addCar(testCar);
         boolean addCar2 = testCarRental.addCar(testCar);
 
@@ -71,9 +71,9 @@ public class TestCarRental {
 
     @Test
     void testAddMultipleCars() {
-        Car testCar1 = new Car("234876", "TESTCAR1", "Sedan", 2024);
-        Car testCar2 = new Car("232834", "TESTCAR2", "Sedan", 2024);
-        Car testCar3 = new Car("236734", "TESTCAR3", "Sedan", 2024);
+        Car testCar1 = new Car("234876", "TESTCAR1", "Test model", "Sedan", "Black", 2024);
+        Car testCar2 = new Car("232834", "TESTCAR2", "Test model", "Sedan", "Black", 2024);
+        Car testCar3 = new Car("236734", "TESTCAR3", "Test model", "Sedan", "Green", 2024);
         boolean addCar1 = testCarRental.addCar(testCar1);
         boolean addCar2 = testCarRental.addCar(testCar2);
         boolean addCarFail = testCarRental.addCar(testCar2);
@@ -100,7 +100,7 @@ public class TestCarRental {
 
     @Test
     void testRemoveOneCar() {
-        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        Car testCar = new Car("234567", "TESTCAR", "Test model", "Sedan", "Green", 2024);
         boolean addCar = testCarRental.addCar(testCar);
         assertTrue(addCar);
         List<Car> testAllCars = testCarRental.getAllCars();
@@ -118,7 +118,7 @@ public class TestCarRental {
 
     @Test
     void testRemoveOneCarUnsuccessful() {
-        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        Car testCar = new Car("234567", "TESTCAR", "Test model", "Sedan", "Black", 2024);
         boolean removeCar = testCarRental.removeCar("234567");
         assertFalse(removeCar);
         List<Car> testAllCars = testCarRental.getAllCars();
@@ -132,7 +132,7 @@ public class TestCarRental {
 
     @Test
     void testRemoveOneCarTwiceUnsuccessful() {
-        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        Car testCar = new Car("234567", "TESTCAR", "Test model A", "Sedan", "Blue", 2024);
         boolean addCar = testCarRental.addCar(testCar);
         assertTrue(addCar);
         List<Car> testAllCars = testCarRental.getAllCars();
@@ -154,7 +154,7 @@ public class TestCarRental {
 
     @Test
     void testRemoveCarWhenCarRentedOut() {
-        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        Car testCar = new Car("234567", "TESTCAR", "Test model B", "Sedan", "Black", 2024);
         boolean addCar = testCarRental.addCar(testCar);
         assertTrue(addCar);
         boolean rentCar = testCarRental.rentACar("234567");
@@ -167,10 +167,26 @@ public class TestCarRental {
     }
 
     @Test
+    void testremoveCarAfterReturned() {
+        Car testCar = new Car("234567", "TESTCAR", "Test model B", "Sedan", "Black", 2024);
+        boolean addCar = testCarRental.addCar(testCar);
+        assertTrue(addCar);
+        boolean rentCar = testCarRental.rentACar("234567");
+        assertTrue(rentCar);
+        boolean returnCar = testCarRental.returnACar("234567");
+        assertTrue(returnCar);
+        boolean removeCar = testCarRental.removeCar("234567");
+        assertTrue(removeCar);
+        assertFalse(testCarRental.getAllRentedCars().contains(testCar));
+        assertFalse(testCarRental.getAllCars().contains(testCar));
+        assertFalse(testCarRental.getAllAvailableCars().contains(testCar));
+    }
+
+    @Test
     void testRemoveMultipleCars() {
-        Car testCar1 = new Car("234876", "TESTCAR1", "Sedan", 2024);
-        Car testCar2 = new Car("232834", "TESTCAR2", "Sedan", 2024);
-        Car testCar3 = new Car("236734", "TESTCAR3", "Sedan", 2024);
+        Car testCar1 = new Car("234876", "TESTCAR1", "Test model A", "Sedan", "Black", 2024);
+        Car testCar2 = new Car("232834", "TESTCAR2", "Test model C", "Sedan", "Green", 2024);
+        Car testCar3 = new Car("236734", "TESTCAR3", "Test model C", "Sedan", "Yellow", 2024);
         boolean addCar1 = testCarRental.addCar(testCar1);
         boolean addCar2 = testCarRental.addCar(testCar2);
         boolean addCar3 = testCarRental.addCar(testCar3);
@@ -211,7 +227,7 @@ public class TestCarRental {
 
     @Test
     void testRentACar() {
-        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        Car testCar = new Car("234567", "TESTCAR", "Test model", "Sedan", "Green", 2024);
         testCarRental.addCar(testCar);
         List<Car> testAllCars = testCarRental.getAllCars();
         assertEquals(6, testAllCars.size());
@@ -227,7 +243,7 @@ public class TestCarRental {
 
     @Test
     void testRentACarUnsucessful() {
-        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        Car testCar = new Car("234567", "TESTCAR", "Test model", "Sedan", "Green", 2024);
         testCarRental.addCar(testCar);
         List<Car> testAllCars = testCarRental.getAllCars();
         assertEquals(6, testAllCars.size());
@@ -249,16 +265,16 @@ public class TestCarRental {
             boolean removeCar1 = testCarRental.removeCar(cars.get(i).getNumber());
         }
         assertEquals(0, testCarRental.getAllCars().size());
-        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        Car testCar = new Car("234567", "TESTCAR", "Test model", "Sedan", "Green", 2024);
         boolean rent = testCarRental.rentACar(testCar.getNumber());
         assertFalse(rent);
     }
 
     @Test
     void testRentMultipleCars() {
-        Car testCar1 = new Car("234876", "TESTCAR1", "Sedan", 2024);
-        Car testCar2 = new Car("232834", "TESTCAR2", "Sedan", 2024);
-        Car testCar3 = new Car("236734", "TESTCAR3", "Sedan", 2024);
+        Car testCar1 = new Car("234876", "TESTCAR1", "Test model", "Sedan", "Green", 2024);
+        Car testCar2 = new Car("232834", "TESTCAR2", "Test model", "Sedan", "Green", 2024);
+        Car testCar3 = new Car("236734", "TESTCAR3", "Test model", "Sedan", "Green", 2024);
 
         testCarRental.addCar(testCar1);
         testCarRental.addCar(testCar2);
@@ -290,7 +306,7 @@ public class TestCarRental {
 
     @Test
     void testReturnACar() {
-        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        Car testCar = new Car("234567", "TESTCAR", "Test model", "Sedan", "Green", 2024);
         testCarRental.addCar(testCar);
         boolean rentCar = testCarRental.rentACar("234567");
         assertTrue(rentCar);
@@ -305,7 +321,7 @@ public class TestCarRental {
 
     @Test
     void testReturnACarUnsucessful() {
-        Car testCar = new Car("234567", "TESTCAR", "Sedan", 2024);
+        Car testCar = new Car("234567", "TESTCAR", "Test model", "Sedan", "Green", 2024);
         testCarRental.addCar(testCar);
         boolean rentCar = testCarRental.rentACar("234567");
         assertTrue(rentCar);
@@ -326,9 +342,9 @@ public class TestCarRental {
 
     @Test
     void testReturnMultiplecars() {
-        Car testCar1 = new Car("234876", "TESTCAR1", "Sedan", 2024);
-        Car testCar2 = new Car("232834", "TESTCAR2", "Sedan", 2024);
-        Car testCar3 = new Car("236734", "TESTCAR3", "Sedan", 2024);
+        Car testCar1 = new Car("234876", "TESTCAR1", "Test model", "Sedan", "Green", 2024);
+        Car testCar2 = new Car("232834", "TESTCAR2", "Test model", "Sedan", "Green", 2024);
+        Car testCar3 = new Car("236734", "TESTCAR3", "Test model", "Sedan", "Green", 2024);
         testCarRental.addCar(testCar1);
         testCarRental.addCar(testCar2);
         testCarRental.addCar(testCar3);
@@ -370,9 +386,9 @@ public class TestCarRental {
 
     @Test
     void testCheckCarInListFailsListNotEmpty() {
-        Car testCar1 = new Car("234876", "TESTCAR1", "Sedan", 2024);
-        Car testCar2 = new Car("232834", "TESTCAR2", "Sedan", 2024);
-        Car testCar3 = new Car("236734", "TESTCAR3", "Sedan", 2024);
+        Car testCar1 = new Car("234876", "TESTCAR1", "Test model", "Sedan", "Green", 2024);
+        Car testCar2 = new Car("232834", "TESTCAR2", "Test model", "Sedan", "Green", 2024);
+        Car testCar3 = new Car("236734", "TESTCAR3", "Test model", "Sedan", "Green", 2024);
         List<Car> cars = new ArrayList<>();
         cars.add(testCar2);
         cars.add(testCar3);
@@ -382,7 +398,7 @@ public class TestCarRental {
 
     @Test
     void testCheckCarInListFailsListEmpty() {
-        Car testCar1 = new Car("234876", "TESTCAR1", "Sedan", 2024);
+        Car testCar1 = new Car("234876", "TESTCAR1", "Test model", "Sedan", "Green", 2024);
         List<Car> cars = new ArrayList<>();
         boolean inSystem = testCarRental.checkCarInList(testCar1.getNumber(), cars);
         assertFalse(inSystem);
@@ -390,14 +406,68 @@ public class TestCarRental {
 
     @Test
     void testCheckCarInListSuccesful() {
-        Car testCar1 = new Car("234876", "TESTCAR1", "Sedan", 2024);
-        Car testCar2 = new Car("232834", "TESTCAR2", "Sedan", 2024);
-        Car testCar3 = new Car("236734", "TESTCAR3", "Sedan", 2024);
+        Car testCar1 = new Car("234876", "TESTCAR1", "Test model", "Sedan", "Green", 2024);
+        Car testCar2 = new Car("232834", "TESTCAR2", "Test model", "Sedan", "Green", 2024);
+        Car testCar3 = new Car("236734", "TESTCAR3", "Test model", "Sedan", "Green", 2024);
         List<Car> cars = new ArrayList<>();
         cars.add(testCar2);
         cars.add(testCar3);
         cars.add(testCar1);
         boolean inSystem = testCarRental.checkCarInList(testCar1.getNumber(), cars);
         assertTrue(inSystem);
+    }
+
+    @Test
+    void testReturnIndexFirstIndex() {
+        Car testCar1 = new Car("234876", "TESTCAR1", "Test model", "Sedan", "Green", 2024);
+        Car testCar2 = new Car("232834", "TESTCAR2", "Test model", "Sedan", "Green", 2024);
+        Car testCar3 = new Car("236734", "TESTCAR3", "Test model", "Sedan", "Green", 2024);
+        List<Car> cars = new ArrayList<>();
+        cars.add(testCar2);
+        cars.add(testCar3);
+        cars.add(testCar1);
+        int index = testCarRental.returnIndex("232834", cars);
+        assertEquals(0, index);
+    }
+
+    @Test
+    void testReturnIndexMiddleIndex() {
+        Car testCar1 = new Car("234876", "TESTCAR1", "Test model", "Sedan", "Green", 2024);
+        Car testCar2 = new Car("232834", "TESTCAR2", "Test model", "Sedan", "Green", 2024);
+        Car testCar3 = new Car("236734", "TESTCAR3", "Test model", "Sedan", "Green", 2024);
+        List<Car> cars = new ArrayList<>();
+        cars.add(testCar2);
+        cars.add(testCar3);
+        cars.add(testCar1);
+        int index = testCarRental.returnIndex("236734", cars);
+        assertEquals(1, index);
+    }
+
+    @Test
+    void testReturnIndexLastIndex() {
+        Car testCar1 = new Car("234876", "TESTCAR1", "Test model", "Sedan", "Green", 2024);
+        Car testCar2 = new Car("232834", "TESTCAR2", "Test model", "Sedan", "Green", 2024);
+        Car testCar3 = new Car("236734", "TESTCAR3", "Test model", "Sedan", "Green", 2024);
+        List<Car> cars = new ArrayList<>();
+        cars.add(testCar2);
+        cars.add(testCar3);
+        cars.add(testCar1);
+        int index = testCarRental.returnIndex("234876", cars);
+        assertEquals(2, index);
+    }
+
+    @Test
+    void testReturnIndexMultiple() {
+        Car testCar1 = new Car("234876", "TESTCAR1", "Test model", "Sedan", "Green", 2024);
+        Car testCar2 = new Car("232834", "TESTCAR2", "Test model", "Sedan", "Green", 2024);
+        Car testCar3 = new Car("236734", "TESTCAR3", "Test model", "Sedan", "Green", 2024);
+        List<Car> cars = new ArrayList<>();
+        cars.add(testCar2);
+        cars.add(testCar3);
+        cars.add(testCar1);
+        int index1 = testCarRental.returnIndex("234876", cars);
+        int index2 = testCarRental.returnIndex("232834", cars);
+        assertEquals(2, index1);
+        assertEquals(0, index2);
     }
 }

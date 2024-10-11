@@ -97,14 +97,14 @@ public class Agency {
     }
 
     // MODIFIES: this
-    // EFFECTS: rents out the car requested by user if user is eligible and the car is available
+    // EFFECTS: rents out the car requested by user if user is eligible and the car
+    // is available
     public void rentOutACar() {
         if (checkEligible()) {
             System.out.println("Here is a list of all available cars:");
             viewAllAvailableCars();
             System.out.println("Enter the number of the car you wish to rent out:");
             String number = input.next();
-            System.out.println(number);
             boolean rent = agency.rentACar(number);
             if (rent) {
                 System.out.println("You have successfully rented out the car!");
@@ -117,7 +117,7 @@ public class Agency {
     }
 
     // MODIFIES: this
-    // EFFECTS: returns the car rented out by user if the car number 
+    // EFFECTS: returns the car rented out by user if the car number
     // provided corresponds to a car rented out
     public void returnRentedCar() {
         System.out.println("Please enter the number of the car that you wish to return:");
@@ -132,17 +132,22 @@ public class Agency {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds a car to collection owned by the agency if not already owned by agency
+    // EFFECTS: adds a car to collection owned by the agency if not already owned by
+    // agency
     public void addACar() {
         System.out.println("Please enter the number of the car you want to add:");
         String number = input.next();
         System.out.println("Please enter the make of the car:");
         String make = input.next();
+        System.out.println("Please enter the model of the car");
+        String model = input.next();
         System.out.println("Please enter the bodystyle of the car:");
         String bodystyle = input.next();
+        System.out.println("Please enter the color of the car:");
+        String color = input.next();
         System.out.println("Please enter the year/ model of the car:");
         int year = input.nextInt();
-        Car newCar = new Car(number, make, bodystyle, year);
+        Car newCar = new Car(number, make, model, bodystyle, color, year);
         boolean addCar = agency.addCar(newCar);
         if (addCar) {
             System.out.println("Car was added to the system!");
@@ -152,8 +157,8 @@ public class Agency {
     }
 
     // MODIFIES: this
-    // EFFECTS: removes the car with the given from collection owned by the agency 
-    // if such a car is owned.
+    // EFFECTS: removes the car with the given from collection owned by the agency
+    // if such a car is owned and not rented out.
     public void removeACar() {
         System.out.println("Please enter the number of the car you wish to remove:");
         String number = input.next();
@@ -169,6 +174,8 @@ public class Agency {
     // EFFECTS: returns true if the person is eligible for renting a car; else
     // returns false.
     public boolean checkEligible() {
+        System.out.println("Please enter the name of the person:");
+        String name = input.next();
         System.out.println("Please enter your age:");
         int age = input.nextInt();
         System.out.println("Please enter your driver's license number:");
@@ -182,13 +189,14 @@ public class Agency {
     }
 
     // EFFECTS: displays information of all cars owned by the car rental
-    // in the order - number, make, bodystyle, model
+    // in the order - number, make, model, bodystyle, color, model
     public void viewAllCars() {
         List<Car> cars = agency.getAllCars();
         if (cars.size() > 0) {
             for (Car car : cars) {
-                System.out.println("Number:" + car.getNumber() + " Make:" + car.getMake() + " Bodystyle:"
-                        + car.getBodystyle() + " Year:" + car.getYear());
+                System.out.println("Number:" + car.getNumber() + " Make:" + car.getMake() + " Model:" + car.getModel()
+                        + " Bodystyle:" + car.getBodystyle() + " Color:" + car.getCarColor() + " Year:"
+                        + car.getYear());
             }
         } else {
             System.out.println("No cars in the agency");
@@ -196,13 +204,14 @@ public class Agency {
     }
 
     // EFFECTS: displays information of all cars owned by the car rental that are
-    // available for renting in the order - number, make, bodystyle, model
+    // available for renting in the order - number, make, bodystyle, color, model
     public void viewAllAvailableCars() {
         List<Car> cars = agency.getAllAvailableCars();
         if (cars.size() > 0) {
             for (Car car : cars) {
-                System.out.println("Number:" + car.getNumber() + " Make:" + car.getMake() + " Bodystyle:"
-                        + car.getBodystyle() + " Year:" + car.getYear());
+                System.out.println("Number:" + car.getNumber() + " Make:" + car.getMake() + " Model:" + car.getModel()
+                        + " Bodystyle:" + car.getBodystyle() + " Color:" + car.getCarColor() + " Year:"
+                        + car.getYear());
             }
         } else {
             System.out.println("No cars available in the agency");
@@ -210,17 +219,18 @@ public class Agency {
     }
 
     // EFFECTS: displays information of all cars owned by the car rental that have
-    // been rented out in the order - number, make, bodystyle, model
+    // been rented out in the order - number, make, bodystyle, color, model
     public void viewAllRentedCars() {
         List<Car> cars = agency.getAllRentedCars();
         if (cars.size() > 0) {
             for (Car car : cars) {
-                System.out.println("Number:" + car.getNumber() + " Make:" + car.getMake() + " Bodystyle:"
-                        + car.getBodystyle() + " Year:" + car.getYear());
+                System.out.println("Number:" + car.getNumber() + " Make:" + car.getMake() + " Model:" + car.getModel()
+                        + " Bodystyle:" + car.getBodystyle() + " Color:" + car.getCarColor() + " Year:"
+                        + car.getYear());
             }
         } else {
             System.out.println("No cars rented out.");
-        } 
+        }
     }
 
     // EFFECTS: displays total revenue made by the agency

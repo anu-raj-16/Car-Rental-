@@ -10,13 +10,13 @@ public class CarRental {
     private List<Car> allRentedCars;
     private double totalRevenue;
 
-    private static final Car FORD = new Car("V4538H", "Ford", "Sedan", 2020);
-    private static final Car TOYOTA = new Car("V3487J", "Toyota", "Sedan", 2021);
-    private static final Car HONDA = new Car("SE48HG", "Honda", "SUV", 2021);
-    private static final Car NISSAN = new Car("YO46GH", "Nissan", "SUV", 2023);
-    private static final Car KIA = new Car("BR2XF6", "Kia", "Sedan", 2022);
+    private static final Car FORD = new Car("V4538H", "Ford", "Fiesta", "Sedan", "Black", 2020);
+    private static final Car TOYOTA = new Car("V3487J", "Toyota", "Corolla", "Sedan", "Blue", 2021);
+    private static final Car HONDA = new Car("SE48HG", "Honda", "Civic", "SUV", "Gray", 2021);
+    private static final Car NISSAN = new Car("YO46GH", "Nissan", "Rogue", "SUV", "Red", 2023);
+    private static final Car KIA = new Car("BR2XF6", "Kia", "Seltos", "Sedan", "Blue", 2022);
 
-    // EFFECTS: constructs a Car Rental with five default cars
+    // EFFECTS: constructs a Car Rental with five default cars, no cars rented out,
     // and sets total revenue to zero.
     public CarRental() {
         allCars = new ArrayList<>();
@@ -58,14 +58,8 @@ public class CarRental {
     // else returns false
     public boolean removeCar(String number) {
         if (checkCarInList(number, allAvailableCars)) {
-            int index = 0;
-            for (int i = 0; i < allAvailableCars.size(); i++) {
-                if (allAvailableCars.get(i).getNumber().equals(number)) {
-                    index = i;
-                }
-            }
-            allCars.remove(index);
-            allAvailableCars.remove(index);
+            allCars.remove(returnIndex(number, allCars));
+            allAvailableCars.remove(returnIndex(number, allAvailableCars));
             return true;
         } else {
             return false;
@@ -82,6 +76,8 @@ public class CarRental {
         totalRevenue += amount;
     }
 
+    // REQUIRES: person the car being rented out to is old enough and
+    // has a valid driver's license
     // MODIFIES: this
     // EFFECTS: rents out the car with the given name and returns true if successful
     // else returns false
@@ -147,6 +143,18 @@ public class CarRental {
         } else {
             return false;
         }
+    }
+
+    // REQUIRES: car with given number must be in list
+    // EFFECTS: returns the index which contains the car with given number
+    public int returnIndex(String number, List<Car> cars) {
+        int index = 0;
+        for (int i = 0; i < cars.size(); i++) {
+            if (cars.get(i).getNumber().equals(number)) {
+                index = i;
+            }
+        }
+        return index;
     }
 
     // getters
