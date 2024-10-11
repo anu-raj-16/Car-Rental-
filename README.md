@@ -8,13 +8,11 @@ As someone who is new to Canada, I am about to get my driver's license and I wou
 
 ## User Stories
 
-- As a user, I want to be able to add a car to my car rental with vehicle number, make, bodystyle, year.
+- As a user, I want to be able to add a car to my car rental with vehicle number, make, model, bodystyle, color, year and mark it as available for renting.
 - As a user, I want to be able to view the cars in my car rental.
-- As a user, I want to be able to mark a car as available for renting.
-- As a user, I want to be able to rent out a car to a person and set a due date.
-- As a user, I want to be able to remove a car from my car rental if it is sold.
+- As a user, I want to be able to rent out a car if the person is old enough to rent a car (21 years in BC) and if they have a valid driver's license.
+- As a user, I want to be able to remove a car from my car rental.
 - As a user, I want to be able to view the number of cars in my car rental and the number of cars that have been rented out.
-- As a user, I want to be able to view the list of cars that have been rented out.
+- As a user, I want to be able to view the details of the cars that have been rented out.
 - As a user, I want to be able to remove a car from the list of rented cars when it is returned, mark it as available for renting and calculate the amount paid.
 - As a user, I want to be able to look at my total revenue.
-- As a user, I want to be able to check if a person is old enough to rent a car (21 years in BC) and if they have a valid driver's license before renting out a car to them.
