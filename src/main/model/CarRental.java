@@ -157,6 +157,12 @@ public class CarRental {
         return index;
     }
 
+    // setter
+
+    public void setTotalRevenue(double revenue) {
+        this.totalRevenue = revenue;
+    }
+
     // getters
 
     public List<Car> getAllCars() {
