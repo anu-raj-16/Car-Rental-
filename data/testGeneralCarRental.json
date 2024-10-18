@@ -1,0 +1,42 @@
+{
+    "allCars": [
+        {
+            "number": "V55JJH",
+            "make": "Ford",
+            "model": "Fiesta",
+            "bodystyle": "Sedan",
+            "color": "white",
+            "year": 2013
+        },
+        {
+            "number": "V35HJH",
+            "make": "Hyundai",
+            "model": "Sonata",
+            "bodystyle": "Sedan",
+            "color": "blue",
+            "year": 2024
+        },
+        {
+            "number": "B67IJH",
+            "make": "Kia",
+            "model": "Seltos",
+            "bodystyle": "SUV",
+            "color": "gray",
+            "year": 2022
+        }
+    ],
+    "allRentedCars": [
+        {
+            "number": "B67IJH",
+            "make": "Kia",
+            "model": "Seltos",
+            "bodystyle": "SUV",
+            "color": "gray",
+            "year": 2022,
+            "dateRentedYear": 2024,
+            "dateRentedMonth": 5,
+            "dateRentedDay": 30
+        }
+    ],
+    "totalRevenue": 400.0
+}
