@@ -55,13 +55,12 @@ public class TestJsonReader extends JsonTest {
             List<Car> rentedCars = cr.getAllRentedCars();
             assertEquals(1, rentedCars.size());
             checkCarInRentedCars("B67IJH", "Kia", "Seltos", "SUV", "gray", 2022, 2024, 5, 30, rentedCars.get(0));
+            List<Car> availableCars = cr.getAllAvailableCars();
+            assertEquals(2, availableCars.size());
 
             assertEquals(400.0, cr.getTotalRevenue());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
     }
-
-
-
 }
