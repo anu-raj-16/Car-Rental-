@@ -1,5 +1,5 @@
 {
     "allCars": [],
-    "allRentedCars": [],
-    "totalRevenue": 0
+    "totalRevenue": 0,
+    "allRentedCars": []
 }
