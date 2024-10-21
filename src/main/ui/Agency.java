@@ -1,5 +1,7 @@
 // References: TellerApp class in the ui package
 // of TellerApp from Phase 1 page on the EdX page
+// Referenced from the JsonSerialization Demo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
 package ui;
 
@@ -231,6 +233,17 @@ public class Agency {
         } else {
             System.out.println("No cars rented out.");
         }
+    }
+
+    // EFFECTS: saves the car rental to file 
+    private void saveCarRental() {
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads car rental from file
+    private void loadCarRental() {
+        
     }
 
     // EFFECTS: displays total revenue made by the agency
