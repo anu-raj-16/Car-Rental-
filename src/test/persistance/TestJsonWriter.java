@@ -19,12 +19,12 @@ public class TestJsonWriter extends JsonTest {
     void testReadInvalidFile() {
         try {
             CarRental cr = new CarRental();
-            JsonWriter writer = new JsonWriter("./data/illegalFile.json");
+            JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
+            fail("IOException was expected");
         } catch (IOException e) {
             // expected
         }
-        fail("IOException was expected");
     }
 
     @Test
@@ -34,12 +34,12 @@ public class TestJsonWriter extends JsonTest {
             while (cr.getAllCars().size() > 0) {
                 cr.removeCar(cr.getAllCars().get(0).getNumber());
             }
-            JsonWriter writer = new JsonWriter("./data/testEmptyCarRental.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptyCarRental.json");
             writer.open();
             writer.write(cr);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testEmptyCarRental.json");
+            JsonReader reader = new JsonReader("./data/testWriterEmptyCarRental.json");
             cr = reader.read();
             assertEquals(0, cr.getAllCars().size());
             assertEquals(0, cr.getAllAvailableCars().size());
@@ -67,12 +67,12 @@ public class TestJsonWriter extends JsonTest {
             car3.setDateRented(30, 5, 2024);
             cr.setTotalRevenue(400);
 
-            JsonWriter writer = new JsonWriter("./data/testGeneralCarRental.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralCarRental.json");
             writer.open();
             writer.write(cr);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testEmptyCarRental.json");
+            JsonReader reader = new JsonReader("./data/testWriterGeneralCarRental.json");
             cr = reader.read();
             List<Car> allCars = cr.getAllCars();
             assertEquals(3, allCars.size());
