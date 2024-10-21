@@ -80,7 +80,23 @@ public class Car implements Writable {
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     @Override
     public JSONObject toJson() {
-        return null;
+        JSONObject json = new JSONObject();
+        json.put("number", this.getNumber());
+        json.put("make", this.getMake());
+        json.put("model", this.getModel());
+        json.put("bodystyle", this.getBodystyle());
+        json.put("color", this.getCarColor());
+        json.put("year", this.getYear());
+        return json;
+    }
+
+    public JSONObject toJsonForRentedCars() {
+        JSONObject json = new JSONObject();
+        json = this.toJson();
+        json.put("dateRentedYear", this.getRentedDate().getYear());
+        json.put("dateRentedMonth", this.getRentedDate().getMonthValue());
+        json.put("dateRentedDay", this.getRentedDate().getDayOfMonth());
+        return json;
     }
 
     //setters

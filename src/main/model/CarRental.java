@@ -6,6 +6,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import persistance.Writable;
@@ -168,7 +169,33 @@ public class CarRental implements Writable {
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     @Override
     public JSONObject toJson() {
-        return null;
+        JSONObject json = new JSONObject();
+        json.put("allCars", addCarsToFile());
+        json.put("allRentedCars", addRentedCarsToFile());
+        json.put("totalRevenue", this.totalRevenue);
+        return json;
+    }
+
+    // EFFECTS: adds all cars in the car rental to file
+    private JSONArray addCarsToFile() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Car c : this.allCars) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    // EFFECTS: adds all rented cars in the car rental to file
+    private JSONArray addRentedCarsToFile() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Car c : this.allRentedCars) {
+            jsonArray.put(c.toJsonForRentedCars());
+        }
+
+        return jsonArray;
     }
 
     // setter

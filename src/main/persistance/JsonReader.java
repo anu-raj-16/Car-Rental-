@@ -17,6 +17,7 @@ import model.CarRental;
 // represents a reader that reads the car rental stored in the json file
 public class JsonReader {
     private String source;
+
     // constructs a reader to read from source file
     public JsonReader(String source) {
         this.source = source;
@@ -101,7 +102,7 @@ public class JsonReader {
         int yearRented = jsonObject.getInt("dateRentedYear");
         cr.rentACar(number);
         List<Car> rentedCars = cr.getAllRentedCars();
-        for (Car c: rentedCars) {
+        for (Car c : rentedCars) {
             if (number.equals(c.getNumber())) {
                 c.setDateRented(dayRented, monthRented, yearRented);
             }
@@ -109,11 +110,10 @@ public class JsonReader {
     }
 
     // MODIFIES: cr
-    // EFFECTS: parses total revenue from JSON object and sets total 
+    // EFFECTS: parses total revenue from JSON object and sets total
     // revenue for car rental
     private void totalRevenue(CarRental cr, JSONObject jsonObject) {
         double revenue = jsonObject.getDouble("totalRevenue");
         cr.setTotalRevenue(revenue);
     }
 }
-
