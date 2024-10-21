@@ -2,14 +2,19 @@
 // and ChronoUnit.DAYS.between(start, end) functions work
 // https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/time/temporal/ChronoUnit.html#between(java.time.temporal.Temporal,java.time.temporal.Temporal)
 // https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/time/LocalDate.html#now()
-
+// Referenced from the JsonSerialization Demo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 package model;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import org.json.JSONObject;
+
+import persistance.Writable;
+
 // represents a Car in the Car Rental System
-public class Car {
+public class Car implements Writable {
     private String number;
     private String make;
     private String model;
@@ -69,6 +74,13 @@ public class Car {
     // dateRented and dateReturned is inclusive
     public void calculateDaysRented() {
         this.daysRented = ChronoUnit.DAYS.between(this.dateRented, this.dateReturned) + 1;
+    }
+
+    // Referenced from the JsonSerialization Demo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    @Override
+    public JSONObject toJson() {
+        return null;
     }
 
     //setters

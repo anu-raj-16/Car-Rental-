@@ -1,10 +1,17 @@
+// Referenced from the JsonSerialization Demo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
 package model;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
+import persistance.Writable;
+
 //represents a Car Rental system
-public class CarRental {
+public class CarRental implements Writable {
     private List<Car> allCars;
     private List<Car> allAvailableCars;
     private List<Car> allRentedCars;
@@ -155,6 +162,13 @@ public class CarRental {
             }
         }
         return index;
+    }
+
+    // Referenced from the JsonSerialization Demo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    @Override
+    public JSONObject toJson() {
+        return null;
     }
 
     // setter
