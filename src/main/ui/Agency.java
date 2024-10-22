@@ -5,18 +5,24 @@
 
 package ui;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
 import model.Car;
 import model.CarRental;
+import persistance.JsonReader;
+import persistance.JsonWriter;
 
 // Car rental ageny app
 public class Agency {
-
+    private static final String JSON_STORE = "./data/carRental.json";
     private CarRental agency;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the Car rental agency app
     public Agency() {
@@ -30,7 +36,12 @@ public class Agency {
         boolean keepRunning = true;
         String command = null;
 
-        init();
+        try {
+            init();
+        } catch (FileNotFoundException e) {
+            System.out.println("File was not found");
+            keepRunning = false;
+        }
 
         while (keepRunning) {
             displayMenu();
@@ -69,6 +80,10 @@ public class Agency {
             numberOfCars();
         } else if (command.equals("j")) {
             numberOfRentedCars();
+        } else if (command.equals("s")) {
+            saveCarRental();
+        } else if (command.equals("l")) {
+            loadCarRental();
         } else {
             System.out.println("Invalid input. Please try again");
         }
@@ -76,10 +91,12 @@ public class Agency {
 
     // MODIFIES: this
     // EFFECTS: initializes car rental agency
-    public void init() {
+    public void init() throws FileNotFoundException {
         agency = new CarRental();
         input = new Scanner(System.in);
         input.useDelimiter("\r?\n|\r");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     // EFFECTS: displays the options available to the user
@@ -95,6 +112,8 @@ public class Agency {
         System.out.println("\th -> to check total revenue");
         System.out.println("\ti -> to check the number of cars in the agency");
         System.out.println("\tj -> to check the number of cars rented out");
+        System.out.println("\ts -> to save the car rental to file");
+        System.out.println("\tl -> to load the car rental from file");
         System.out.println("\tq -> to quit");
     }
 
@@ -237,13 +256,25 @@ public class Agency {
 
     // EFFECTS: saves the car rental to file 
     private void saveCarRental() {
-
+        try {
+            jsonWriter.open();
+            jsonWriter.write(agency);
+            jsonWriter.close();
+            System.out.println("Saved car rental to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: loads car rental from file
     private void loadCarRental() {
-        
+        try {
+            agency = jsonReader.read();
+            System.out.println("Loaded car rental from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
     // EFFECTS: displays total revenue made by the agency

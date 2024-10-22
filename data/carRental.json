@@ -1,0 +1,61 @@
+{
+    "allCars": [
+        {
+            "number": "V4538H",
+            "color": "Black",
+            "year": 2020,
+            "bodystyle": "Sedan",
+            "model": "Fiesta",
+            "make": "Ford"
+        },
+        {
+            "number": "V3487J",
+            "color": "Blue",
+            "year": 2021,
+            "bodystyle": "Sedan",
+            "model": "Corolla",
+            "make": "Toyota"
+        },
+        {
+            "number": "SE48HG",
+            "color": "Gray",
+            "year": 2021,
+            "bodystyle": "SUV",
+            "model": "Civic",
+            "make": "Honda"
+        },
+        {
+            "number": "BR2XF6",
+            "color": "Blue",
+            "year": 2022,
+            "bodystyle": "Sedan",
+            "model": "Seltos",
+            "make": "Kia"
+        }
+    ],
+    "totalRevenue": 100,
+    "allRentedCars": [
+        {
+            "dateRentedMonth": 10,
+            "number": "V3487J",
+            "dateRentedYear": 2024,
+            "color": "Blue",
+            "year": 2021,
+            "bodystyle": "Sedan",
+            "model": "Corolla",
+            "make": "Toyota",
+            "dateRentedDay": 21
+        },
+        {
+            "dateRentedMonth": 10,
+            "number": "BR2XF6",
+            "dateRentedYear": 2024,
+            "color": "Blue",
+            "year": 2022,
+            "bodystyle": "Sedan",
+            "model": "Seltos",
+            "make": "Kia",
+            "dateRentedDay": 21
+        }
+    ]
+}
