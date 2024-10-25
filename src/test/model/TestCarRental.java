@@ -7,8 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import persistance.JsonWriter;
 
 public class TestCarRental {
     private CarRental testCarRental;
@@ -469,5 +473,44 @@ public class TestCarRental {
         int index2 = testCarRental.returnIndex("232834", cars);
         assertEquals(2, index1);
         assertEquals(0, index2);
+    }
+
+    // REFERENCE: https://stleary.github.io/JSON-java/index.html
+    @Test
+    void testToJson() {
+        testCarRental.setTotalRevenue(400.0);
+        testCarRental.rentACar("V4538H");
+        testCarRental.getAllCars().get(0).setDateRented(10, 10, 2024);
+        JSONObject json = testCarRental.toJson();
+        JSONArray allCarsAdded = json.getJSONArray("allCars");
+        JSONArray allRentedCarsAdded = json.getJSONArray("allRentedCars");
+        assertEquals(400.0, json.get("totalRevenue"));
+        assertEquals(5, allCarsAdded.length());
+        assertEquals(1, allRentedCarsAdded.length());
+        int i = 0;
+        while (i < allCarsAdded.length()) {
+            JSONObject car = allCarsAdded.getJSONObject(i);
+            assertEquals(testCarRental.getAllCars().get(i).getNumber(), car.get("number"));
+            assertEquals(testCarRental.getAllCars().get(i).getMake(), car.get("make"));
+            assertEquals(testCarRental.getAllCars().get(i).getModel(), car.get("model"));
+            assertEquals(testCarRental.getAllCars().get(i).getBodystyle(), car.get("bodystyle"));
+            assertEquals(testCarRental.getAllCars().get(i).getCarColor(), car.get("color"));
+            assertEquals(testCarRental.getAllCars().get(i).getYear(), car.get("year"));
+            i++;
+        }
+        i = 0;
+        while (i < allRentedCarsAdded.length()) {
+            JSONObject car = allRentedCarsAdded.getJSONObject(i);
+            assertEquals(testCarRental.getAllCars().get(i).getNumber(), car.get("number"));
+            assertEquals(testCarRental.getAllCars().get(i).getMake(), car.get("make"));
+            assertEquals(testCarRental.getAllCars().get(i).getModel(), car.get("model"));
+            assertEquals(testCarRental.getAllCars().get(i).getBodystyle(), car.get("bodystyle"));
+            assertEquals(testCarRental.getAllCars().get(i).getCarColor(), car.get("color"));
+            assertEquals(testCarRental.getAllCars().get(i).getYear(), car.get("year"));
+            assertEquals(testCarRental.getAllCars().get(i).getRentedDate().getDayOfMonth(), car.get("dateRentedDay"));
+            assertEquals(testCarRental.getAllCars().get(i).getRentedDate().getMonthValue(), car.get("dateRentedMonth"));
+            assertEquals(testCarRental.getAllCars().get(i).getRentedDate().getYear(), car.get("dateRentedYear"));
+            i++;
+        }
     }
 }

@@ -25,6 +25,14 @@
             "make": "Honda"
         },
         {
+            "number": "YO46GH",
+            "color": "Red",
+            "year": 2023,
+            "bodystyle": "SUV",
+            "model": "Rogue",
+            "make": "Nissan"
+        },
+        {
             "number": "BR2XF6",
             "color": "Blue",
             "year": 2022,
@@ -33,29 +41,16 @@
             "make": "Kia"
         }
     ],
-    "totalRevenue": 100,
-    "allRentedCars": [
-        {
-            "dateRentedMonth": 10,
-            "number": "V3487J",
-            "dateRentedYear": 2024,
-            "color": "Blue",
-            "year": 2021,
-            "bodystyle": "Sedan",
-            "model": "Corolla",
-            "make": "Toyota",
-            "dateRentedDay": 21
-        },
-        {
-            "dateRentedMonth": 10,
-            "number": "BR2XF6",
-            "dateRentedYear": 2024,
-            "color": "Blue",
-            "year": 2022,
-            "bodystyle": "Sedan",
-            "model": "Seltos",
-            "make": "Kia",
-            "dateRentedDay": 21
-        }
-    ]
+    "totalRevenue": 0,
+    "allRentedCars": [{
+        "dateRentedMonth": 10,
+        "number": "SE48HG",
+        "dateRentedYear": 2024,
+        "color": "Gray",
+        "year": 2021,
+        "bodystyle": "SUV",
+        "model": "Civic",
+        "make": "Honda",
+        "dateRentedDay": 24
+    }]
 }
