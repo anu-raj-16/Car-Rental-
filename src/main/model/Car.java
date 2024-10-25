@@ -4,6 +4,7 @@
 // https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/time/LocalDate.html#now()
 // Referenced from the JsonSerialization Demo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
 package model;
 
 import java.time.LocalDate;
