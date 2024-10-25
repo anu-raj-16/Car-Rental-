@@ -91,6 +91,8 @@ public class Car implements Writable {
         return json;
     }
 
+    // Referenced from the JsonSerialization Demo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     public JSONObject toJsonForRentedCars() {
         JSONObject json = new JSONObject();
         json = this.toJson();

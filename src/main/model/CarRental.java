@@ -176,6 +176,8 @@ public class CarRental implements Writable {
         return json;
     }
 
+    // Referenced from the JsonSerialization Demo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: adds all cars in the car rental to file
     private JSONArray addCarsToFile() {
         JSONArray jsonArray = new JSONArray();
@@ -187,6 +189,8 @@ public class CarRental implements Writable {
         return jsonArray;
     }
 
+    // Referenced from the JsonSerialization Demo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: adds all rented cars in the car rental to file
     private JSONArray addRentedCarsToFile() {
         JSONArray jsonArray = new JSONArray();

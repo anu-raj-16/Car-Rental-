@@ -41,7 +41,7 @@
             "make": "Kia"
         }
     ],
-    "totalRevenue": 0,
+    "totalRevenue": 100,
     "allRentedCars": [{
         "dateRentedMonth": 10,
         "number": "SE48HG",

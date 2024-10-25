@@ -1,5 +1,6 @@
 // References: TellerApp class in the ui package
 // of TellerApp from Phase 1 page on the EdX page
+// https://github.students.cs.ubc.ca/CPSC210/TellerApp
 // Referenced from the JsonSerialization Demo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
@@ -59,6 +60,7 @@ public class Agency {
     }
 
     // EFFECTS: processes user input and performs the corresponding action
+    @SuppressWarnings("methodlength")
     public void processInput(String command) {
         if (command.equals("a")) {
             rentOutACar();
@@ -88,6 +90,7 @@ public class Agency {
             System.out.println("Invalid input. Please try again");
         }
     }
+    // I asked the TA before using the SuppressWarnings("methodlength") annotation for the processInput method
 
     // MODIFIES: this
     // EFFECTS: initializes car rental agency
@@ -254,6 +257,8 @@ public class Agency {
         }
     }
 
+    // Referenced from the JsonSerialization Demo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: saves the car rental to file 
     private void saveCarRental() {
         try {
@@ -266,6 +271,8 @@ public class Agency {
         }
     }
 
+    // Referenced from the JsonSerialization Demo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // MODIFIES: this
     // EFFECTS: loads car rental from file
     private void loadCarRental() {
