@@ -4,6 +4,7 @@
 package ui;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +20,8 @@ public class AgencyGUI extends JFrame {
     private static final String JSON_STORE = "./data/carRental.json";
     private CarRental agency;
     private CarsPanel allCarsPanel;
+    private RentedCarsPanel allRentedCarsPanel;
+    private AvailableCarsPanel allAvailableCarsPanel;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
@@ -34,15 +37,23 @@ public class AgencyGUI extends JFrame {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
 
-        setLayout(new BorderLayout());
+        // setLayout(new BorderLayout());
+        setLayout(new GridLayout(0, 1));
         setSize(800, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        add(addbuttonsPanel(), BorderLayout.NORTH);
+        JPanel allButtons = addbuttonsPanel();
+        add(allButtons, BorderLayout.NORTH);
 
         allCarsPanel = new CarsPanel(agency);
         add(allCarsPanel, BorderLayout.CENTER);
+
+        allRentedCarsPanel = new RentedCarsPanel(agency);
+        add(allRentedCarsPanel);
+
+        allAvailableCarsPanel = new AvailableCarsPanel(agency);
+        add(allAvailableCarsPanel, BorderLayout.SOUTH);
 
         setVisible(true);
     }
@@ -64,6 +75,8 @@ public class AgencyGUI extends JFrame {
         Car newCar = new Car(number, make, model, bodystyle, color, year);
         if (agency.addCar(newCar)) {
             allCarsPanel.update(agency);
+            allRentedCarsPanel.update(agency);
+            allAvailableCarsPanel.update(agency);
             JOptionPane.showMessageDialog(null, "Car has been added!");
         } else {
             JOptionPane.showMessageDialog(null, "Sorry, car with given number is already in system.");
@@ -77,6 +90,8 @@ public class AgencyGUI extends JFrame {
         if (agency.removeCar(number)) {
             JOptionPane.showMessageDialog(null, "Car has been removed!");
             allCarsPanel.update(agency);
+            allRentedCarsPanel.update(agency);
+            allAvailableCarsPanel.update(agency);
         } else {
             JOptionPane.showMessageDialog(null,
                     "Sorry, car with given number has been rented out or is not in the system.");
@@ -89,14 +104,26 @@ public class AgencyGUI extends JFrame {
         if (agency.rentACar(number)) {
             JOptionPane.showMessageDialog(null, "Car has been rented out!");
             allCarsPanel.update(agency);
+            allRentedCarsPanel.update(agency);
+            allAvailableCarsPanel.update(agency);
         } else {
             JOptionPane.showMessageDialog(null,
                     "Sorry, car with given number has been rented out or is not in the system.");
         }
     }
 
-    public void viewAvailableCars() {
-        JOptionPane.showMessageDialog(rootPane, accessibleContext);
+    public void returnCar() {
+        String number = JOptionPane.showInputDialog(null,
+                "Car number?", "Enter car number", JOptionPane.QUESTION_MESSAGE);
+        if (agency.returnACar(number)) {
+            JOptionPane.showMessageDialog(null, "Car has been returned!");
+            allCarsPanel.update(agency);
+            allRentedCarsPanel.update(agency);
+            allAvailableCarsPanel.update(agency);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Sorry, car with given number was not returned.");
+        }
     }
 
     // Referenced from the JsonSerialization Demo
@@ -110,7 +137,7 @@ public class AgencyGUI extends JFrame {
             JOptionPane.showMessageDialog(null,
                     "Car Rental stored to " + JSON_STORE);
         } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null,"Unable to write to file: " + JSON_STORE);
+            JOptionPane.showMessageDialog(null, "Unable to write to file: " + JSON_STORE);
         }
     }
 
@@ -123,6 +150,8 @@ public class AgencyGUI extends JFrame {
             JOptionPane.showMessageDialog(null,
                     "Car Rental loaded from " + JSON_STORE);
             allCarsPanel.update(agency);
+            allRentedCarsPanel.update(agency);
+            allAvailableCarsPanel.update(agency);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Unable to read from file: " + JSON_STORE);
         }
@@ -133,9 +162,10 @@ public class AgencyGUI extends JFrame {
         buttonsPanel.add(new JButton(new AddCar()));
         buttonsPanel.add(new JButton(new RemoveCar()));
         buttonsPanel.add(new JButton(new RentCar()));
-        buttonsPanel.add(new JButton(new ViewAvailableCars()));
+        buttonsPanel.add(new JButton(new ReturnCar()));
         buttonsPanel.add(new JButton(new SaveCarRental()));
         buttonsPanel.add(new JButton(new LoadCarRental()));
+        buttonsPanel.setBackground(new Color(255, 204, 204));
         return buttonsPanel;
     }
 
@@ -173,14 +203,14 @@ public class AgencyGUI extends JFrame {
         }
     }
 
-    private class ViewAvailableCars extends AbstractAction {
-        ViewAvailableCars() {
-            super("View all available cars");
+    private class ReturnCar extends AbstractAction {
+        ReturnCar() {
+            super("Return car");
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            viewAvailableCars();
+            returnCar();
         }
     }
 
