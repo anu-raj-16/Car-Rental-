@@ -3,14 +3,12 @@
 package ui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.ListModel;
 
 import model.Car;
 import model.CarRental;

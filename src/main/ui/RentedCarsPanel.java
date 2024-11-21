@@ -1,3 +1,5 @@
+// Reference: https://github.students.cs.ubc.ca/CPSC210/B02-SpaceInvadersBase
+
 package ui;
 
 import java.awt.Color;
