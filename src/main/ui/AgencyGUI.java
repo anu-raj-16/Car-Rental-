@@ -67,6 +67,7 @@ public class AgencyGUI extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         JPanel allButtons = addbuttonsPanel();
+        allButtons.setBackground(new Color(255, 204, 204));
         add(allButtons, BorderLayout.NORTH);
 
         // Reference: B02-SpaceInvadersBase Project
@@ -229,23 +230,17 @@ public class AgencyGUI extends JFrame {
         rentButton.setIcon(new ImageIcon("data/images/rent_icon.jpeg"));
         JButton returnButton = new JButton(new ReturnCar());
         returnButton.setIcon(new ImageIcon("data/images/Return_icon.jpeg"));
-
         buttonsPanel.add(rentButton);
         buttonsPanel.add(returnButton);
-
         JButton saveButton = new JButton(new SaveCarRental());
         saveButton.setIcon(new ImageIcon("data/images/save_image.jpeg"));
         buttonsPanel.add(saveButton);
-
         JButton loadButton = new JButton(new LoadCarRental());
         loadButton.setIcon(new ImageIcon("data/images/LoadButton.jpeg"));
         buttonsPanel.add(loadButton);
-
         JButton visualButton = new JButton(new VisualComponent());
         visualButton.setIcon(new ImageIcon("data/images/visual.jpeg"));
         buttonsPanel.add(visualButton);
-
-        buttonsPanel.setBackground(new Color(255, 204, 204));
         return buttonsPanel;
     }
 
@@ -341,6 +336,5 @@ public class AgencyGUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
             Splash splash = new Splash();
         }
-        
     }
 }
