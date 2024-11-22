@@ -1,4 +1,6 @@
 // REFERENCE: https://stackoverflow.com/questions/16134549/how-to-make-a-splash-screen-for-gui
+// REFERENCE: Java Swing Tutorial for Beginners by Java Code Junkie on YouTube
+// REFERENCE: https://www.youtube.com/watch?v=4PfDdJ8GFHI&list=PL3bGLnkkGnuV699lP_f9DvxyK5lMFpq6U&index=3
 
 package ui;
 
@@ -18,17 +20,10 @@ public class Splash extends JFrame {
         setSize(1000, 1000);
         setLayout(new BorderLayout());
         // image created by Gemini AI
-        JLabel splashScreen = new JLabel(new ImageIcon("images/Gemini_Generated_Image_p9po5yp9po5yp9po.jpeg"));
+        JLabel splashScreen = new JLabel(new ImageIcon("data/images/Gemini_Generated_Image_p9po5yp9po5yp9po.jpeg"));
         add(splashScreen);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            System.out.println("");
-        }
-        setVisible(false);
-        dispose();
     }
 }

@@ -1,4 +1,7 @@
-// Reference: https://github.students.cs.ubc.ca/CPSC210/B02-SpaceInvadersBase
+// Reference: B02-SpaceInvadersBase Project
+// https://github.students.cs.ubc.ca/CPSC210/B02-SpaceInvadersBase
+
+// REFERENCE: for the rgb code for colors - https://www.rapidtables.com/web/color/RGB_Color.html
 
 package ui;
 

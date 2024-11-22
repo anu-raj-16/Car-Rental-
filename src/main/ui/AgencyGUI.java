@@ -1,8 +1,25 @@
+// REFERENCE: Java Swing Tutorial for Beginners by Java Code Junkie on YouTube
 // REFERENCE: https://www.youtube.com/watch?v=4PfDdJ8GFHI&list=PL3bGLnkkGnuV699lP_f9DvxyK5lMFpq6U&index=3
-// REFERENCE: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
-// Reference: https://github.students.cs.ubc.ca/CPSC210/B02-SpaceInvadersBase
-// Reference: https://github.students.cs.ubc.ca/CPSC210/SimpleDrawingPlayer-Starter
+// REFERENCE: https://www.youtube.com/watch?v=impJtkTcQ94&list=PL3bGLnkkGnuV699lP_f9DvxyK5lMFpq6U&index=6
+
+// REFERENCE: AlarmSystem Project 
+// https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
+
+// Reference: B02-SpaceInvadersBase Project
+// https://github.students.cs.ubc.ca/CPSC210/B02-SpaceInvadersBase
+
+// Reference: SimpleDrawingPlayer-Starter Project
+// https://github.students.cs.ubc.ca/CPSC210/SimpleDrawingPlayer-Starter
+
 // Reference: https://www.javatpoint.com/java-string-to-int
+
+// Referenced from the JsonSerialization Demo - 
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
+// REFERENCE: RobustTrafficLights Project or the C3-LectureLabStarter - 
+// https://github.students.cs.ubc.ca/CPSC210/C3-LectureLabStarter
+
+// REFERENCE: for the rgb code for colors - https://www.rapidtables.com/web/color/RGB_Color.html
 
 package ui;
 
@@ -34,11 +51,12 @@ public class AgencyGUI extends JFrame {
         initialize();
     }
 
+    // REFERENCE: Java Swing Tutorial for Beginners by Java Code Junkie on YouTube
+    // https://www.youtube.com/watch?v=4PfDdJ8GFHI&list=PL3bGLnkkGnuV699lP_f9DvxyK5lMFpq6U&index=3
     // REFERENCE:
     // https://github.students.cs.ubc.ca/CPSC210/SimpleDrawingPlayer-Starter
     // EFFECTS: initializes the Car Rental system
     private void initialize() {
-        Splash splashScreen = new Splash();
         agency = new CarRental();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -51,6 +69,8 @@ public class AgencyGUI extends JFrame {
         JPanel allButtons = addbuttonsPanel();
         add(allButtons, BorderLayout.NORTH);
 
+        // Reference: B02-SpaceInvadersBase Project
+        // https://github.students.cs.ubc.ca/CPSC210/B02-SpaceInvadersBase
         allCarsPanel = new CarsPanel(agency);
         add(allCarsPanel, BorderLayout.CENTER);
 
@@ -63,6 +83,7 @@ public class AgencyGUI extends JFrame {
         setVisible(true);
     }
 
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // EFFECTS: adds a car to the system if it does not already exist
     private void addCar() {
         String number = JOptionPane.showInputDialog(null,
@@ -88,6 +109,7 @@ public class AgencyGUI extends JFrame {
         }
     }
 
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // EFFECTS: removes a car if it not rented out and present in the system
     private void removeCar() {
         String number = JOptionPane.showInputDialog(null,
@@ -103,6 +125,7 @@ public class AgencyGUI extends JFrame {
         }
     }
 
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // EFFECTS: rents out the car if it is available and person is eligible.
     private void rentCar() {
         if (eligibility()) {
@@ -123,6 +146,7 @@ public class AgencyGUI extends JFrame {
         }
     }
 
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // EFFECTS: checks if a person is eligible to rent a car.
     private boolean eligibility() {
         String age = JOptionPane.showInputDialog(null,
@@ -137,6 +161,7 @@ public class AgencyGUI extends JFrame {
         return ageNum >= 21 && expDateLocalDate.compareTo(today) > 0;
     }
 
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // EFFECTS: returns a car if it has been rented out.
     private void returnCar() {
         String number = JOptionPane.showInputDialog(null,
@@ -152,6 +177,7 @@ public class AgencyGUI extends JFrame {
         }
     }
 
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // Referenced from the JsonSerialization Demo
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: saves car rental to file
@@ -167,6 +193,7 @@ public class AgencyGUI extends JFrame {
         }
     }
 
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // Referenced from the JsonSerialization Demo
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: loads car rental from file
@@ -183,38 +210,46 @@ public class AgencyGUI extends JFrame {
         }
     }
 
+    // REFERENCE: for image icons specifically, RobustTrafficLights Project or the C3-LectureLabStarter - 
+    // https://github.students.cs.ubc.ca/CPSC210/C3-LectureLabStarter
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // EFFECTS: adds the buttons to the JFrame
     private JPanel addbuttonsPanel() {
         // images generated by Gemini AI
         JPanel buttonsPanel = new JPanel();
         JButton addButton = new JButton(new AddCar());
-        addButton.setIcon(new ImageIcon("images/add_icon.jpeg"));
+        addButton.setIcon(new ImageIcon("data/images/add_icon.jpeg"));
         buttonsPanel.add(addButton);
 
         JButton removeButton = new JButton(new RemoveCar());
-        removeButton.setIcon(new ImageIcon("images/remove_icon.jpeg"));
+        removeButton.setIcon(new ImageIcon("data/images/remove_icon.jpeg"));
         buttonsPanel.add(removeButton);
 
         JButton rentButton = new JButton(new RentCar());
-        rentButton.setIcon(new ImageIcon("images/rent_icon.jpeg"));
+        rentButton.setIcon(new ImageIcon("data/images/rent_icon.jpeg"));
         JButton returnButton = new JButton(new ReturnCar());
-        returnButton.setIcon(new ImageIcon("images/Return_icon.jpeg"));
+        returnButton.setIcon(new ImageIcon("data/images/Return_icon.jpeg"));
 
         buttonsPanel.add(rentButton);
         buttonsPanel.add(returnButton);
 
         JButton saveButton = new JButton(new SaveCarRental());
-        saveButton.setIcon(new ImageIcon("images/save_image.jpeg"));
+        saveButton.setIcon(new ImageIcon("data/images/save_image.jpeg"));
         buttonsPanel.add(saveButton);
 
         JButton loadButton = new JButton(new LoadCarRental());
-        loadButton.setIcon(new ImageIcon("images/LoadButton.jpeg"));
+        loadButton.setIcon(new ImageIcon("data/images/LoadButton.jpeg"));
         buttonsPanel.add(loadButton);
+
+        JButton visualButton = new JButton(new VisualComponent());
+        visualButton.setIcon(new ImageIcon("data/images/visual.jpeg"));
+        buttonsPanel.add(visualButton);
 
         buttonsPanel.setBackground(new Color(255, 204, 204));
         return buttonsPanel;
     }
 
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // represents action to be taken when user wants to add a car to the agency.
     private class AddCar extends AbstractAction {
 
@@ -228,6 +263,7 @@ public class AgencyGUI extends JFrame {
         }
     }
 
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // represents action to be taken when user wants to remove a car from the agency.
 
     private class RemoveCar extends AbstractAction {
@@ -241,6 +277,7 @@ public class AgencyGUI extends JFrame {
         }
     }
 
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // represents action to be taken when user wants to rent a car from the agency.
     private class RentCar extends AbstractAction {
         RentCar() {
@@ -253,6 +290,7 @@ public class AgencyGUI extends JFrame {
         }
     }
 
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // represents action to be taken when user wants to return a car to the agency.
     private class ReturnCar extends AbstractAction {
         ReturnCar() {
@@ -265,6 +303,7 @@ public class AgencyGUI extends JFrame {
         }
     }
 
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // represents action to be taken when user wants to save the car rental.
     private class SaveCarRental extends AbstractAction {
         SaveCarRental() {
@@ -277,6 +316,7 @@ public class AgencyGUI extends JFrame {
         }
     }
 
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // represents action to be taken when user wants to load the car rental.
     private class LoadCarRental extends AbstractAction {
         LoadCarRental() {
@@ -287,5 +327,20 @@ public class AgencyGUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
             load();
         }
+    }
+
+    // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
+    // represents action to be taken when one wants to see the visual component image.
+    private class VisualComponent extends AbstractAction {
+
+        VisualComponent() {
+            super("");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Splash splash = new Splash();
+        }
+        
     }
 }

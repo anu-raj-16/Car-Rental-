@@ -25,6 +25,6 @@ As someone who is new to Canada, I am about to get my driver's license and I wou
 - You can generate the first required action related to the user story "adding multiple Xs to a Y" by clicking on the button with an icon labelled 'remove'.
 - You can generate the second required action related to the user story "adding multiple Xs to a Y" by clicking on the button with an icon labelled 'Rent'.
 - You can generate the third required action related to the user story "adding multiple Xs to a Y" by clicking on the button with an icon labelled 'Return'.
-- You can locate my visual component by looking at the icons used for the buttons.
+- You can locate my visual component by looking at the icons used for the buttons, and also clicking on the button with an icon labelled 'Visual'.
 - You can save the state of my application by clicking on the button with an icon having a floppy disk and tick mark.
 - You can reload the state of my application by clicking on the button with an icon labelled 'Load'.
