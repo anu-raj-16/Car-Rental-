@@ -20,7 +20,7 @@ public class Splash extends JFrame {
         setSize(1000, 1000);
         setLayout(new BorderLayout());
         // image created by Gemini AI
-        JLabel splashScreen = new JLabel(new ImageIcon("data/images/Gemini_Generated_Image_p9po5yp9po5yp9po.jpeg"));
+        JLabel splashScreen = new JLabel(new ImageIcon("./data/images/Gemini_Generated_Image_p9po5yp9po5yp9po.jpeg"));
         add(splashScreen);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
