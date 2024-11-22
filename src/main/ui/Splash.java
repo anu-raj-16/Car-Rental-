@@ -8,7 +8,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+// creates a splash screen
+
 public class Splash extends JFrame {
+
+    // EFFECTS: constructs a splashs screen for the app
     public Splash() {
         super("Splash Screen");
         setSize(1000, 1000);

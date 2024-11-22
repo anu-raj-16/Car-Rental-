@@ -13,15 +13,19 @@ import javax.swing.JPanel;
 import model.Car;
 import model.CarRental;
 
+// represents the panel with all available cars in the agency.
+
 public class AvailableCarsPanel extends JPanel {
     private CarRental carRental;
     private JList<String> availableCarsJList;
 
+    // EFFECTS: constructs the panel and adds all available cars in the agency.
     public AvailableCarsPanel(CarRental cr) {
         carRental = cr;
         createCarsPanel();
     }
 
+    // EFFECTS: adds the available cars to the panel.
     private void createCarsPanel() {
         DefaultListModel<String> allCarsStrings = new DefaultListModel<>();
         JLabel allCarsLabel = new JLabel("All available cars in the agency:");
@@ -41,6 +45,7 @@ public class AvailableCarsPanel extends JPanel {
         add(availableCarsJList);
     }
 
+    // EFFECTS: updates the panel.
     public void update(CarRental cr) {
         carRental = cr;
         removeAll();

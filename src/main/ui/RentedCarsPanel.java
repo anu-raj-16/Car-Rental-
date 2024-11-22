@@ -10,15 +10,19 @@ import javax.swing.*;
 import model.Car;
 import model.CarRental;
 
+// represents the panel displaying the rented cars
+
 public class RentedCarsPanel extends JPanel {
     private CarRental carRental;
     private JList<String> rentedCarsJList;
 
+    // EFFECTS: constructs the panel which displays the rented cars
     public RentedCarsPanel(CarRental cr) {
         carRental = cr;
         createCarsPanel();
     }
 
+    // EFFECTS: adds the rented cars in the agency to the panel.
     private void createCarsPanel() {
         DefaultListModel<String> allCarsStrings = new DefaultListModel<>();
         JLabel allCarsLabel = new JLabel("All rented cars in the agency:");
@@ -38,6 +42,7 @@ public class RentedCarsPanel extends JPanel {
         add(rentedCarsJList);
     }
 
+    // EFFECTS: updates the panel.
     public void update(CarRental cr) {
         carRental = cr;
         removeAll();
@@ -45,5 +50,4 @@ public class RentedCarsPanel extends JPanel {
         revalidate();
         repaint();
     }
-
 }

@@ -13,36 +13,16 @@ import javax.swing.JPanel;
 import model.Car;
 import model.CarRental;
 
+// represents the panel with all the cars in the agency.
+
 public class CarsPanel extends JPanel {
     private CarRental carRental;
     private JList<String> carsJList;
-
-    public static final String SANS_SERIF = "SansSerif";
-    private static final int LBL_HEIGHT = 30;
-    private static final int LBL_WIDTH = 700;
 
     // EFFECTS: contructs a panel with all cars in the car rental
     public CarsPanel(CarRental cr) {
         carRental = cr;
         createCarsPanel();
-
-        // JLabel allCarsLabel = new JLabel("All cars in the agency:");
-        // allCarsLabel.setForeground(new Color(255,255,102));
-        // add(allCarsLabel);
-
-        // for (Car car : cars) {
-        // JTextField carLabel = new JTextField("Number: " + car.getNumber() + " Make: "
-        // + car.getMake() + " Model: " + car.getModel()
-        // + " Bodystyle: " + car.getBodystyle() + " Color: " + car.getCarColor() + "
-        // Year: " + car.getYear());
-        // carLabel.setPreferredSize(new Dimension(LBL_WIDTH, LBL_HEIGHT));
-        // carLabel.setForeground(new Color(255,255,153));
-        // carLabel.setBackground((new Color(153, 76, 0)));
-        // carLabel.setEditable(false);
-        // add(carLabel);
-        // add(new JLabel("\n"));
-        // }
-
     }
 
     private void createCarsPanel() {
@@ -70,21 +50,6 @@ public class CarsPanel extends JPanel {
         removeAll();
 
         createCarsPanel();
-        // JLabel allCarsLabel = new JLabel("All cars in the agency:");
-        // allCarsLabel.setPreferredSize(new Dimension(300, 30));
-        // allCarsLabel.setForeground(new Color(255,255,102));
-        // add(allCarsLabel);
-
-        // List<Car> cars = carRental.getAllCars();
-        // for (Car car : cars) {
-        // JLabel carLabel = new JLabel("Number: " + car.getNumber() + " Make: " +
-        // car.getMake() + " Model: " + car.getModel()
-        // + " Bodystyle: " + car.getBodystyle() + " Color: " + car.getCarColor() + "
-        // Year: " + car.getYear());
-        // carLabel.setPreferredSize(new Dimension(LBL_WIDTH, LBL_HEIGHT));
-        // carLabel.setForeground(new Color(255,255,153));
-        // add(carLabel);
-        // }
         revalidate();
         repaint();
     }
