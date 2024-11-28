@@ -21,22 +21,28 @@
 
 // REFERENCE: for the rgb code for colors - https://www.rapidtables.com/web/color/RGB_Color.html
 
+// REFERENCE: https://docs.oracle.com/javase/tutorial/uiswing/events/windowlistener.html#windowlistener
+
 package ui;
 
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 
 import model.Car;
 import model.CarRental;
+import model.Event;
+import model.EventLog;
 import persistance.JsonReader;
 import persistance.JsonWriter;
 
-public class AgencyGUI extends JFrame {
+public class AgencyGUI extends JFrame implements WindowListener {
     private static final String JSON_STORE = "./data/carRental.json";
     private CarRental agency;
     private CarsPanel allCarsPanel;
@@ -60,11 +66,12 @@ public class AgencyGUI extends JFrame {
         agency = new CarRental();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
+        addWindowListener(this);
 
         setLayout(new GridLayout(0, 1));
         setSize(800, 500);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        // setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         JPanel allButtons = addbuttonsPanel();
         allButtons.setBackground(new Color(255, 204, 204));
@@ -82,6 +89,7 @@ public class AgencyGUI extends JFrame {
         add(allAvailableCarsPanel, BorderLayout.SOUTH);
 
         setVisible(true);
+
     }
 
     // REFERENCE: AlarmSystem Project - https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
@@ -336,5 +344,47 @@ public class AgencyGUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
             Splash splash = new Splash();
         }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        // REFERENCE: AlarmSystem Project 
+        // https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
+        
+        EventLog el = EventLog.getInstance();
+        for (Event event : el) {
+            System.out.println(event.toString());
+        }
+        System.exit(0);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        
     }
 }

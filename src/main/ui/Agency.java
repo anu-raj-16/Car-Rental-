@@ -3,6 +3,8 @@
 // https://github.students.cs.ubc.ca/CPSC210/TellerApp
 // Referenced from the JsonSerialization Demo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+// REFERENCE: AlarmSystem Project 
+// https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
 
 package ui;
 
@@ -12,8 +14,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+import model.Event;
 import model.Car;
 import model.CarRental;
+import model.EventLog;
 import persistance.JsonReader;
 import persistance.JsonWriter;
 
@@ -56,6 +60,13 @@ public class Agency {
             }
         }
 
+        // REFERENCE: AlarmSystem Project 
+        // https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
+        
+        EventLog el = EventLog.getInstance();
+        for (Event event : el) {
+            System.out.println(event.toString());
+        }
         System.out.println("\nThank you and hope to see you soon!");
     }
 

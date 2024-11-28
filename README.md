@@ -28,3 +28,14 @@ As someone who is new to Canada, I am about to get my driver's license and I wou
 - You can locate my visual component by looking at the icons used for the buttons, and also clicking on the button with an icon labelled 'Visual'.
 - You can save the state of my application by clicking on the button with an icon having a floppy disk and tick mark.
 - You can reload the state of my application by clicking on the button with an icon labelled 'Load'.
+
+## Phase 4: Task 2
+
+- Wed Nov 27 18:58:59 PST 2024
+- VVGYYU was added to the car rental system
+- Wed Nov 27 18:59:07 PST 2024
+- V3487J was removed from the car rental system
+- Wed Nov 27 18:59:49 PST 2024
+- BR2XF6 was rented out from the car rental system
+- Wed Nov 27 19:00:00 PST 2024
+- BR2XF6 was returned to the car rental system

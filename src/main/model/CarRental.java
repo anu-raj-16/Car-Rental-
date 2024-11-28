@@ -46,8 +46,11 @@ public class CarRental implements Writable {
         totalRevenue = 0;
     }
 
+    // REFERENCE: taken from AlarmSystem Project
+    // https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // MODIFIES: this
-    // EFFECTS: adds the given car to the list of cars if given car with its car.getNumber() is
+    // EFFECTS: adds the given car to the list of cars if given car with its
+    // car.getNumber() is
     // not already in the system and sets the car as available for renting and
     // returns true, else returns false
     public boolean addCar(Car c) {
@@ -56,18 +59,22 @@ public class CarRental implements Writable {
         } else {
             allCars.add(c);
             allAvailableCars.add(c);
+            EventLog.getInstance().logEvent(new Event(c.getNumber() + " was added to the car rental system"));
             return true;
         }
     }
 
+    // REFERENCE: taken from AlarmSystem Project
+    // https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // MODIFIES: this
-    // EFFECTS: removes the car with the given number from the list of cars in this 
+    // EFFECTS: removes the car with the given number from the list of cars in this
     // if car is in the system, not rented out (is available) and returns true,
     // else returns false
     public boolean removeCar(String number) {
         if (checkCarInList(number, allAvailableCars)) {
             allCars.remove(returnIndex(number, allCars));
             allAvailableCars.remove(returnIndex(number, allAvailableCars));
+            EventLog.getInstance().logEvent(new Event(number + " was removed from the car rental system"));
             return true;
         } else {
             return false;
@@ -84,6 +91,8 @@ public class CarRental implements Writable {
         totalRevenue += amount;
     }
 
+    // REFERENCE: taken from AlarmSystem Project
+    // https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // REQUIRES: person the car being rented out to is old enough and
     // has a valid driver's license
     // MODIFIES: this
@@ -102,6 +111,7 @@ public class CarRental implements Writable {
         if (allAvailableCars.size() > 0) {
             if (allRentedCars.contains(allAvailableCars.get(count))) {
                 allAvailableCars.remove(count);
+                EventLog.getInstance().logEvent(new Event(number + " was rented out from the car rental system"));
                 return true;
             } else {
                 return false;
@@ -111,6 +121,8 @@ public class CarRental implements Writable {
         }
     }
 
+    // REFERENCE: taken from AlarmSystem Project
+    // https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
     // MODIFIES: this
     // EFFECTS: returns the car to the agency with the given name
     // and updates the total revenue made and returns true if successful
@@ -129,6 +141,7 @@ public class CarRental implements Writable {
         if (allRentedCars.size() > 0) {
             if (allAvailableCars.contains(allRentedCars.get(count))) {
                 allRentedCars.remove(count);
+                EventLog.getInstance().logEvent(new Event(number + " was returned to the car rental system"));
                 return true;
             } else {
                 return false;
@@ -139,7 +152,7 @@ public class CarRental implements Writable {
     }
 
     // EFFECTS: returns true if a car given the given number is in given list,
-    //          else returns false, also return false if list is empty
+    // else returns false, also return false if list is empty
     public boolean checkCarInList(String number, List<Car> cars) {
         if (cars.size() > 0) {
             for (Car car : cars) {
