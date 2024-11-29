@@ -39,3 +39,8 @@ As someone who is new to Canada, I am about to get my driver's license and I wou
 - BR2XF6 was rented out from the car rental system
 - Wed Nov 27 19:00:00 PST 2024
 - BR2XF6 was returned to the car rental system
+
+
+## Phase 4: Task 3
+
+- If I had more time for Phase 3, I would have made a super class for allCarsPanel, allAvailableCarsPanel and allRentedCarsPanel as they have very similar implementation and behaviour and this duplication of code can be avoided. 

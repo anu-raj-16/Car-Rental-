@@ -351,6 +351,7 @@ public class AgencyGUI extends JFrame implements WindowListener {
         
     }
 
+    // EFFECTS: logs the events to the console and closes application
     @Override
     public void windowClosing(WindowEvent e) {
         // REFERENCE: AlarmSystem Project 
